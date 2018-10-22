@@ -1,0 +1,27 @@
+
+.MenuDropDownItemContainer {
+    position: relative;
+    background-color: antiquewhite;
+    width: 100px;
+    height: 40px;
+}
+
+.MenuDropDownItemContainer .item-title {
+    font-size: medium;
+    text-align: center;
+}
+
+.MenuDropDownItemContainer .item-hint_c {
+    position: absolute;
+    top: 0;
+    left: 105px;
+    width: 150px;
+    height: 50px;
+    background-color: aquamarine;
+}
+
+.MenuDropDownItemContainer .item-hint_c p {
+    text-align: left;
+    font-size: 16px;
+    padding: 0;
+}

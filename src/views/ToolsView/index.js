@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import MenuDropDownItem from '../../components/MenuDropDownItem/MenuDropDownItem';
 
 import './styles.css';
 
@@ -17,13 +18,17 @@ export default class ToolsView extends React.Component {
     }
   }
 
+  clickOnIt(title) {
+    console.log(title);
+  }
+
   render() {
     console.log(this.props.position)
     let styles = 'tools-view-c ' + this.props.position.toString();
 
     return (
       <div className={styles}>
-
+        <MenuDropDownItem clickCallback={this.clickOnIt} title={'test'}/>
       </div>
     );
   }

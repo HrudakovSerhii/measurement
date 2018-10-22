@@ -1,0 +1,10 @@
+/**
+ * Created by Serhiy on 07.10.18.
+ */
+
+export const PACK_CALCULATION_COMMAND = {
+  BATTERIES_SIZE: 'BATTERIES_SIZE', // width/height/length
+  BATTERIES_ELECTRICS_PARAMS: 'BATTERIES_ELECTRICS_PARAMS', // volts/amps/watts
+  BATTERIES_PHYSICS_PARAMS: 'BATTERIES_PHYSICS_PARAMS', // weight/
+  BATTERIES_SAFETY_PARAMS: 'BATTERIES_SAFETY_PARAMS' // charge/discharge/dangers
+};

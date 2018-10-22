@@ -3,10 +3,12 @@
  */
 
 import { combineReducers } from 'redux'
-// import toolsReducer from '../views/ToolsView/reducers';
+import packCalculation from './packCalculation';
+import batteriesCalculation from './batteriesCalculation';
 
 const calculationReducer = combineReducers({
-  // todos
+  batteriesCalculation,
+  packCalculation
 });
 
 export default calculationReducer;

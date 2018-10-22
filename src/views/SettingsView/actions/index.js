@@ -3,6 +3,5 @@
  */
 
 export const changePosition = (position) => ({
-  type: 'POSITION',
-  positionType: position
+  type: position,
 });

@@ -5,12 +5,12 @@ import propTypes from 'prop-types';
 
 import './App.css';
 
-import WorkDeskView from './views/WorkDeskView';
+import WorkSpaceView from './views/WorkSpaceView';
 
 import ToolsView from './views/ToolsView';
 import SettingsView from './views/SettingsView';
 
-import { changePosition } from './views/SettingsView/actions'
+// import { changePosition } from './views/SettingsView/actions'
 
 class App extends React.Component {
   constructor(props) {
@@ -27,13 +27,13 @@ class App extends React.Component {
   }
 
   render() {
-    const position = this.state.appState.toolbarPosition;
+    const position = this.props.toolbarPosition;
 
     return (
       <div className="app-c">
         <div className="work-space-c">
           <ToolsView position={position} toolsTypes={this.state.toolsState.toolsTypes} tools={this.state.toolsState.tools} />
-          <WorkDeskView position={position}
+          <WorkSpaceView position={position}
                          type={this.state.workSpaceState.type}
                          mode={this.state.workSpaceState.mode}
                          view={this.state.workSpaceState.view}
@@ -47,15 +47,17 @@ class App extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  changePosition: (position) => {
-    dispatch(changePosition(position))
+function mapStateToProps(state) {
+  return {
+    toolbarPosition: state.appState.toolbarPosition
   }
-});
+}
 
-const mapStateToProps = (state) => ({
-  text: state.text
-});
+function mapDispatchToProps(dispatch) {
+  return {
+
+  };
+}
 
 App.propTypes = {
   appState: propTypes.object.isRequired,

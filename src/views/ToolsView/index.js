@@ -18,7 +18,8 @@ export default class ToolsView extends React.Component {
   }
 
   render() {
-    let styles = 'tools-view-c ' + this.props.position;
+    console.log(this.props.position)
+    let styles = 'tools-view-c ' + this.props.position.toString();
 
     return (
       <div className={styles}>

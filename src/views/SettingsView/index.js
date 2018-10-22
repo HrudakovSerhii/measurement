@@ -24,7 +24,7 @@ class SettingsView extends React.Component {
       loaded: this.props.loaded,
       themeType: this.props.themeType,
       language: this.props.language,
-      toolbarPosition: this.props.toolbarPosition
+      // toolbarPosition: this.props.toolbarPosition TODO: if this props alse in mapStateToProps then remove from here
     }
   }
 
@@ -39,20 +39,27 @@ class SettingsView extends React.Component {
         </div>
         <div className="view-c">
 
-          <button onClick={() => this.props.changeToolbarPosition(TOOL_BAR_POSITION.DOWN)}>Change Position</button>
+          <button onClick={() => this.props.changePosition(TOOL_BAR_POSITION.DOWN)}>Change Position</button>
         </div>
       </div>
     )
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  changeToolbarPosition: (position) => {
-    dispatch(changePosition(position))
+function mapStateToProps(state) {
+  return {
+    changePosition: state.changePosition
   }
-});
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    changePosition: (position) => dispatch(changePosition(position)),
+  };
+}
 
 SettingsView = connect(
+  mapStateToProps,
   mapDispatchToProps
 )(SettingsView);
 

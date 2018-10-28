@@ -1,0 +1,23 @@
+
+.MenuDropDownContainer {
+    position: relative;
+    background-color: grey;
+    width: 100px;
+    height: 50px;
+}
+
+.dropDown_c {
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+.dropDown_c.open {
+    display: block;
+    visibility: visible;
+}
+
+.dropDown_c.closed {
+    display: none;
+    visibility: hidden;
+}

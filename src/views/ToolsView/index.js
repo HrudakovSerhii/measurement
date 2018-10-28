@@ -4,6 +4,7 @@
 
 import React from 'react';
 import MenuDropDownItem from '../../components/MenuDropDownItem/MenuDropDownItem';
+import MenuDropDown from '../../components/MenuDropDown/MenuDropDown';
 
 import './styles.css';
 
@@ -28,7 +29,7 @@ export default class ToolsView extends React.Component {
 
     return (
       <div className={styles}>
-        <MenuDropDownItem clickCallback={this.clickOnIt} title={'test'}/>
+        <MenuDropDown title="Menu"/>
       </div>
     );
   }

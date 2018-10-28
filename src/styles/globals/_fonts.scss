@@ -1,0 +1,91 @@
+//DIN
+@font-face {
+  font-family: 'DINComp';
+  src: url('/fonts/DIN/DINComp-Light.ttf');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DINComp';
+  src: url('/fonts/DIN/DINComp-LightIta.ttf');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'DINComp';
+  src: url('/fonts/DIN/DINComp.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DINComp';
+  src: url('/fonts/DIN/DINComp-Ita.ttf');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'DINComp';
+  src: url('/fonts/DIN/DINComp-Medium.ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DINComp';
+  src: url('/fonts/DIN/DINComp-MediumIta.ttf');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'DINComp';
+  src: url('/fonts/DIN/DINComp-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DINComp';
+  src: url('/fonts/DIN/DINComp-BoldIta.ttf');
+  font-weight: 700;
+  font-style: italic;
+}
+
+// DIN Cyrillic
+/*
+This CSS resource incorporates links to font software which is the valuable copyrighted property of Monotype and/or its suppliers.
+You may not attempt to copy, install, redistribute, convert, modify or reverse engineer this font software.
+Please contact Monotype with any questions regarding Web Fonts: https://www.linotype.com
+*/
+
+@font-face {
+  font-family: 'DINCyrillic';
+  src: url('/fonts/DIN-Cyrillic/DIN_Cyrillic_Light.ttf');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DINCyrillic';
+  src: url('/fonts/DIN-Cyrillic/DIN_Cyrillic_Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DINCyrillic';
+  src: url('/fonts/DIN-Cyrillic/DIN_Cyrillic_Medium.ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'DINCyrillic';
+  src: url('/fonts/DIN-Cyrillic/DIN_Cyrillic_Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}

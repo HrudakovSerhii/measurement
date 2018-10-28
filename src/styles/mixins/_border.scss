@@ -16,3 +16,7 @@
   border-bottom-left-radius: $radius;
   border-top-left-radius: $radius;
 }
+@mixin border($color, $style, $radius, $width) {
+  border-radius: $radius;
+  border: $style $color $width;
+}

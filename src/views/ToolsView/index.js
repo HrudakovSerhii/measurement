@@ -3,7 +3,6 @@
  */
 
 import React from 'react';
-import MenuDropDownItem from '../../components/MenuDropDownItem/MenuDropDownItem';
 import MenuDropDown from '../../components/MenuDropDown/MenuDropDown';
 
 import './styles.css';
@@ -19,17 +18,19 @@ export default class ToolsView extends React.Component {
     }
   }
 
-  clickOnIt(title) {
-    console.log(title);
-  }
-
   render() {
-    console.log(this.props.position)
+    console.log(this.props.position);
+
     let styles = 'tools-view-c ' + this.props.position.toString();
+    const items = [
+      'setting',
+      'adjustments',
+      'news'
+    ];
 
     return (
       <div className={styles}>
-        <MenuDropDown title="Menu"/>
+        <MenuDropDown title="Menu" items={items}/>
       </div>
     );
   }

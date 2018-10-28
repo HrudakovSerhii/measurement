@@ -6,7 +6,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // styles
-import './styles.css';
+import './styles.scss';
 
 export default class MenuDropDownItem extends React.Component {
   static propTypes = {
@@ -77,7 +77,7 @@ export default class MenuDropDownItem extends React.Component {
 
     return (
       <div className='MenuDropDownItemContainer'
-           onClick={() => this.props.clickCallback(this.props.title)}
+           onClick={(e) => this.props.clickCallback(e, this.props.title)}
            onMouseOver={() => this.startHintTimer()}
            onMouseLeave={() => this.finishHintTimer()}>
         <span className="item-title">{this.props.title}</span>

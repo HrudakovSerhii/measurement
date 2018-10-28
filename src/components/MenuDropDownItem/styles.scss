@@ -1,27 +1,31 @@
+@import './../../styles/constants.scss';
 
 .MenuDropDownItemContainer {
     position: relative;
-    background-color: antiquewhite;
+    background-color: grey;
     width: 100px;
     height: 40px;
-}
+    line-height: 40px;
 
-.MenuDropDownItemContainer .item-title {
-    font-size: medium;
-    text-align: center;
-}
+    .item-title {
+        font-size: medium;
+        text-align: center;
+        vertical-align: middle;
+    }
 
-.MenuDropDownItemContainer .item-hint_c {
-    position: absolute;
-    top: 0;
-    left: 105px;
-    width: 150px;
-    height: 50px;
-    background-color: aquamarine;
-}
+    .item-hint_c {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: 250px;
+        height: inherit;
+        color: $greyBlack;
+        background-color: white;
 
-.MenuDropDownItemContainer .item-hint_c p {
-    text-align: left;
-    font-size: 16px;
-    padding: 0;
+        p {
+            text-align: left;
+            font-size: 16px;
+            padding: 0;
+        }
+    }
 }

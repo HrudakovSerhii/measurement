@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 
 import propTypes from 'prop-types';
 
-import './App.css';
+import './styles/app.scss';
+import './styles/index.scss';
 
 import WorkSpaceView from './views/WorkSpaceView';
 

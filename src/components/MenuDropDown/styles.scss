@@ -10,14 +10,14 @@
     position: absolute;
     top: 100%;
     left: 0;
-}
 
-.dropDown_c.open {
-    display: block;
-    visibility: visible;
-}
+    &.open {
+        display: block;
+        visibility: visible;
+    }
 
-.dropDown_c.closed {
-    display: none;
-    visibility: hidden;
+    &.closed {
+        display: none;
+        visibility: hidden;
+    }
 }

@@ -8,7 +8,7 @@ import React from 'react';
 import MenuDropDownItem from '../MenuDropDownItem/MenuDropDownItem';
 
 // Styles
-import './styles.css';
+import './styles.scss';
 
 export default class MenuDropDown extends React.Component {
   constructor(props) {

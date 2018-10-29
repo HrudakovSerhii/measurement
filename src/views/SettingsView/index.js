@@ -10,7 +10,9 @@ import './styles.css';
 
 import { changePosition } from './actions'
 
-import { TOOL_BAR_POSITION } from './../../constants';
+// import { MenuDropDown } from '../../components/Menu';
+import MenuDropDown from './../../components/Menu/MenuDropDown';
+import { TOOL_BAR_POSITION, FILE_MENU } from './../../constants';
 
 class SettingsView extends React.Component {
   static propTypes = {
@@ -31,6 +33,7 @@ class SettingsView extends React.Component {
   render() {
     return (
       <div className="setting-view-c">
+        <MenuDropDown title={FILE_MENU.TITLE} items={FILE_MENU.MENU}/>
         <div className="file-c">
 
         </div>

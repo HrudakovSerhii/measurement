@@ -68,6 +68,52 @@ export const COMMANDS = {
   }
 };
 
+export const MENU_TYPES = {
+  ENABLED: 'ENABLED',
+  DISABLED: 'DISABLED',
+  HAS_OPTIONS: 'HAS_OPTIONS'
+};
+
+export const FILE_MENU = {
+  TITLE: 'File',
+  MENU: [
+    {
+      title: 'New',
+      type: MENU_TYPES.HAS_OPTIONS
+    },
+    {
+      title: 'Open',
+      type: MENU_TYPES.ENABLED
+    },
+    {
+      title: 'Open Recent',
+      type: MENU_TYPES.HAS_OPTIONS
+    },
+    {
+      title: 'devider'
+    },
+    {
+      title: 'Save',
+      type: MENU_TYPES.ENABLED
+    },
+    {
+      title: 'Save ass..',
+      type: MENU_TYPES.HAS_OPTIONS
+    },
+    {
+      title: 'devider'
+    },
+    {
+      title: 'Print',
+      type: MENU_TYPES.ENABLED
+    },
+    {
+      title: 'Send',
+      type: MENU_TYPES.HAS_OPTIONS
+    }
+  ]
+};
+
 export const APP_SETTINGS = {
   appState: {
     themeType: THEME_TYPES.DEFAULT,

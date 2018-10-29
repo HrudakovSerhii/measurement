@@ -3,9 +3,8 @@
  */
 
 import React from 'react';
-import MenuDropDown from '../../components/MenuDropDown/MenuDropDown';
 
-import './styles.css';
+import './styles.scss';
 
 export default class ToolsView extends React.Component {
   constructor(props) {
@@ -22,15 +21,10 @@ export default class ToolsView extends React.Component {
     console.log(this.props.position);
 
     let styles = 'tools-view-c ' + this.props.position.toString();
-    const items = [
-      'setting',
-      'adjustments',
-      'news'
-    ];
 
     return (
       <div className={styles}>
-        <MenuDropDown title="Menu" items={items}/>
+
       </div>
     );
   }

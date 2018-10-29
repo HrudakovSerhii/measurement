@@ -11,7 +11,7 @@ import './styles.scss';
 export default class MenuDropDownItem extends React.Component {
   static propTypes = {
     clickCallback: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
   };
 
   constructor(props) {
@@ -76,7 +76,7 @@ export default class MenuDropDownItem extends React.Component {
     const itemHint = this.getHintFromTitle(this.props.title);
 
     return (
-      <div className='MenuDropDownItemContainer'
+      <div className="MenuDropDownItemContainer"
            onClick={(e) => this.props.clickCallback(e, this.props.title)}
            onMouseOver={() => this.startHintTimer()}
            onMouseLeave={() => this.finishHintTimer()}>

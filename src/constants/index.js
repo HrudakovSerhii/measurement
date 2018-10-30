@@ -79,7 +79,18 @@ export const FILE_MENU = {
   MENU: [
     {
       title: 'New',
-      type: MENU_TYPES.HAS_OPTIONS
+      type: MENU_TYPES.HAS_OPTIONS,
+      options: [
+        {
+          title: 'File'
+        },
+        {
+          title: 'Project'
+        }
+      ]
+    },
+    {
+      title: 'newDivider'
     },
     {
       title: 'Open',
@@ -87,21 +98,40 @@ export const FILE_MENU = {
     },
     {
       title: 'Open Recent',
-      type: MENU_TYPES.HAS_OPTIONS
+      type: MENU_TYPES.HAS_OPTIONS,
+      options: [
+        {
+          title: 'File'
+        },
+        {
+          title: 'Project'
+        }
+      ]
     },
     {
-      title: 'devider'
+      title: 'openDivider'
     },
     {
       title: 'Save',
       type: MENU_TYPES.ENABLED
     },
     {
-      title: 'Save ass..',
-      type: MENU_TYPES.HAS_OPTIONS
+      title: 'Save as..',
+      type: MENU_TYPES.HAS_OPTIONS,
+      options: [
+        {
+          title: 'As file'
+        },
+        {
+          title: 'As pdf'
+        },
+        {
+          title: 'As scheme'
+        }
+      ]
     },
     {
-      title: 'devider'
+      title: 'saveDivider'
     },
     {
       title: 'Print',
@@ -109,7 +139,18 @@ export const FILE_MENU = {
     },
     {
       title: 'Send',
-      type: MENU_TYPES.HAS_OPTIONS
+      type: MENU_TYPES.HAS_OPTIONS,
+      options: [
+        {
+          title: 'As file'
+        },
+        {
+          title: 'As pdf'
+        },
+        {
+          title: 'As scheme'
+        }
+      ]
     }
   ]
 };

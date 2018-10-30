@@ -12,7 +12,7 @@ import { changePosition } from './actions'
 
 // import { MenuDropDown } from '../../components/Menu';
 import MenuDropDown from './../../components/Menu/MenuDropDown';
-import { TOOL_BAR_POSITION, FILE_MENU } from './../../constants';
+import { FILE_MENU } from './../../constants';
 
 class SettingsView extends React.Component {
   static propTypes = {
@@ -42,7 +42,6 @@ class SettingsView extends React.Component {
         </div>
         <div className="view-c">
 
-          <button onClick={() => this.props.changePosition(TOOL_BAR_POSITION.DOWN)}>Change Position</button>
         </div>
       </div>
     )

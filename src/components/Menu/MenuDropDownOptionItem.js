@@ -5,35 +5,60 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import MenuDropDownItem from './MenuDropDownItem';
+
 // styles
 import './styles.scss';
 
 export default class MenuDropDownOptionItem extends React.Component {
   static propTypes = {
     clickCallback: PropTypes.func.isRequired,
+    closeOtherOptionViews: PropTypes.func,
     title: PropTypes.string.isRequired,
+    options: PropTypes.array.isRequired,
+    selected: PropTypes.bool,
+    index: PropTypes.number
   };
 
-  constructor(props) {
-    super(props);
+  state = {
+    optionVisible: this.props.selected,
+  };
 
-    this.state = {
-      selected: false,
-      hintVisible: false,
-      hintTimerRunning: false
-    };
+  menuItemOptionItemCallback(e, title) {
+    e.stopPropagation();
+
+    console.log(title);
+  }
+
+  openOptionItem(e) {
+    e.stopPropagation();
+
+    this.props.closeOtherOptionViews(this.props.index);
+
+    this.setState({ optionVisible: !this.state.optionVisible});
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.selected !== prevProps.selected) {
+      this.setState({ optionVisible: this.props.selected})
+    }
   }
 
   render() {
+    const { title, options } = this.props;
+    const optionsItems = options && options.map((item) => (<MenuDropDownItem key={item.title} clickCallback={this.menuItemOptionItemCallback} title={item.title} />));
+
     return (
       <div className="MenuDropDownOptionItemContainer"
-           onClick={(e) => this.props.clickCallback(e, this.props.title)}>
-        <span className="item-title">{this.props.title}</span>
-        { this.state.hintVisible && (
-          <div className="item-hint_c">
-            <p>{'ss'}</p>
-          </div>
-        )}
+           onClick={(e) => this.openOptionItem(e)}>
+        <span className="item-title">{title}</span>
+        { this.state.optionVisible && (
+          <div className="item-option-list">
+            <ul>
+            { optionsItems }
+            </ul>
+          </div>)
+        }
       </div>
     );
   }

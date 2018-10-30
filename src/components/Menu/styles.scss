@@ -42,17 +42,19 @@
 
 .MenuDropDownOptionItemContainer,
 .MenuDropDownItemContainer {
-    position: relative;
-    background-color: grey;
-    width: 100px;
-    height: 40px;
-    line-height: 40px;
-
     .item-title {
         font-size: medium;
         text-align: center;
         vertical-align: middle;
     }
+}
+
+.MenuDropDownItemContainer {
+    position: relative;
+    background-color: grey;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
 
     .item-hint_c {
         position: absolute;
@@ -68,6 +70,20 @@
             font-size: 16px;
             padding: 0;
         }
+    }
+}
+
+.MenuDropDownOptionItemContainer {
+    position: relative;
+    background-color: grey;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+
+    .item-option-list {
+        position: relative;
+        top: -100%;
+        left: 100%;
     }
 }
 

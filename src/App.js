@@ -17,8 +17,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log(props);
-
     this.state = {
       appState: props.appState,
       toolsState: props.toolsState,

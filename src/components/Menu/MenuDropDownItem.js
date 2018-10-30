@@ -12,13 +12,15 @@ export default class MenuDropDownItem extends React.Component {
   static propTypes = {
     clickCallback: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
+    closeOtherOptionViews: PropTypes.func,
+    selected: PropTypes.bool,
+    index: PropTypes.number
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      selected: false,
       hintVisible: false,
       hintTimerRunning: false
     };
@@ -26,6 +28,7 @@ export default class MenuDropDownItem extends React.Component {
     this.startHintTimer = this.startHintTimer.bind(this);
     this.finishHintTimer = this.finishHintTimer.bind(this);
     this.showHint = this.showHint.bind(this);
+    this.selectItem = this.selectItem.bind(this);
   }
 
   getHintFromTitle(title) {
@@ -72,12 +75,18 @@ export default class MenuDropDownItem extends React.Component {
     }
   }
 
+  selectItem(e) {
+    e.stopPropagation();
+
+    this.props.closeOtherOptionViews(this.props.index);
+  }
+
   render() {
     const itemHint = this.getHintFromTitle(this.props.title);
 
     return (
       <div className="MenuDropDownItemContainer"
-           onClick={(e) => this.props.clickCallback(e, this.props.title)}
+           onClick={this.selectItem}
            onMouseOver={() => this.startHintTimer()}
            onMouseLeave={() => this.finishHintTimer()}>
         <span className="item-title">{this.props.title}</span>

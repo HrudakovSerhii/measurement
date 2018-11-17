@@ -7,9 +7,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import MenuDropDownItem from './MenuDropDownItem';
-import MenuDropDownOptionItem from './MenuDropDownOptionItem';
-import MenuDropDownItemDevider from './MenuDropDownItemDevider';
+import MenuDropDownItem from './components/MenuDropDownItem';
+import MenuDropDownOptionItem from './components/MenuDropDownOptionItem';
 
 // Constants
 import { MENU_TYPES } from './../../constants';
@@ -86,7 +85,7 @@ export default class MenuDropDown extends React.Component {
                                         selected={itemData.selected}
                                         disabled={type === MENU_TYPES.DISABLED} />);
       default:
-        return (<MenuDropDownItemDevider key={itemData.title} />);
+        return (<div key={itemData.title} className='MenuDropDownItemDeviderContainer'/>);
     }
   }
 
@@ -94,7 +93,7 @@ export default class MenuDropDown extends React.Component {
     const { title } = this.props;
 
     const menuItems = this.state.items && this.state.items.map((item, index) => this.getMenuItemByType(item.type, item, index));
-    const dropDownStyle = 'dropDown_c ' + (this.state.opened ? 'open' : 'closed');
+    const dropDownStyle = 'DropDownContainer ' + (this.state.opened ? 'open' : 'closed');
 
     return (
       <div className='MenuDropDownContainer' onClick={this.dropDownMenuHandler}>

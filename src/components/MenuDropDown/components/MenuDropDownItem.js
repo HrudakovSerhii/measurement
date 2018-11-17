@@ -6,7 +6,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // styles
-import './styles.scss';
+import '../styles.scss';
 
 export default class MenuDropDownItem extends React.Component {
   static propTypes = {

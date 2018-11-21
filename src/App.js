@@ -13,6 +13,8 @@ import SettingsView from './views/SettingsView';
 
 // import { changePosition } from './views/SettingsView/actions'
 
+import { SimpleCalculationScreen } from './screens';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -30,17 +32,18 @@ class App extends React.Component {
 
     return (
       <div className="app-c">
-        <div className="work-space-c">
-          <ToolsView position={position} toolsTypes={this.state.toolsState.toolsTypes} tools={this.state.toolsState.tools} />
-          <WorkSpaceView position={position}
-                         type={this.state.workSpaceState.type}
-                         mode={this.state.workSpaceState.mode}
-                         view={this.state.workSpaceState.view}
-                         quality={this.state.workSpaceState.quality} />
-        </div>
-        <SettingsView themeType={this.state.appState.themeType}
-                      language={this.state.appState.language}
-                      toolbarPosition={position} />
+        <SimpleCalculationScreen />
+        {/*<div className="work-space-c">*/}
+          {/*<ToolsView position={position} toolsTypes={this.state.toolsState.toolsTypes} tools={this.state.toolsState.tools} />*/}
+          {/*<WorkSpaceView position={position}*/}
+                         {/*type={this.state.workSpaceState.type}*/}
+                         {/*mode={this.state.workSpaceState.mode}*/}
+                         {/*view={this.state.workSpaceState.view}*/}
+                         {/*quality={this.state.workSpaceState.quality} />*/}
+        {/*</div>*/}
+        {/*<SettingsView themeType={this.state.appState.themeType}*/}
+                      {/*language={this.state.appState.language}*/}
+                      {/*toolbarPosition={position} />*/}
       </div>
     );
   }

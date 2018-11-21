@@ -15,20 +15,25 @@ import { BATTERY_TYPES_LIST } from './../../constants';
 
 import './styles.scss';
 
-class SimpleCalculationScreen extends React.Component {
+export default class SimpleCalculationScreen extends React.Component {
+  static propTypes = {
+
+  };
+
   constructor(props) {
     super(props);
 
     this.state = {
       userPowerValue: undefined,
       userCurrentValue: undefined,
+      userBatteryTypeId: undefined,
     };
-
-    this.selectItem = this.selectItem.bind(this);
   }
 
-  selectItem(item) {
-
+  selectItem(key, value) {
+    this.setState({
+      [key]: value
+    })
   }
 
   render() {
@@ -38,7 +43,7 @@ class SimpleCalculationScreen extends React.Component {
       <div className="SimpleCalculationScreenContainer">
         <InputField value={userPowerValue} label={'Power (Watt/H)'} placeholder={'Input power value for target device'} />
         <InputField value={userCurrentValue} label={'Current (Volts)'} placeholder={'Input current value for target device'} />
-        <DropDownSelect label={'Choose your battery type'} dataList={BATTERY_TYPES_LIST} onChange={this.selectItem}/>
+        <DropDownSelect label={'Choose your battery type'} dataList={BATTERY_TYPES_LIST} onChange={(id) => this.selectItem('userBatteryTypeId', id)}/>
       </div>
     );
   }
@@ -59,12 +64,6 @@ class SimpleCalculationScreen extends React.Component {
 // - максимальний струм 20A
 //
 // 4. Формфактор мм(діаметр/висота) - 18/650
-
-SimpleCalculationScreen.propTypes = {
-
-};
-
-export default SimpleCalculationScreen;
 
 // тормозити виконання важконавантаженного потоку по сигналу контроллера. Таким чином буде можливо керування швидкодією
 // программи, і продовжувати вчасно реагувати на дії юзера. Фактично в будь який момент інтеракції, программа може

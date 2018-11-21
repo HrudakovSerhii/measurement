@@ -6,7 +6,7 @@ import InputField from './InputField';
 import MenuDropDown from './MenuDropDown';
 import DropDownSelect from './DropDownSelect';
 
-export default {
+export {
   InputField,
   MenuDropDown,
   DropDownSelect

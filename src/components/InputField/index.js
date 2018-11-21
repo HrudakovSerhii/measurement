@@ -7,7 +7,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // styles
-import './styles';
+import './styles.scss';
 
 class InputField extends React.Component {
   render() {

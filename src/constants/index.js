@@ -37,7 +37,94 @@ export const BATTERIES_TYPES = {
   PB: 'PB'
 };
 
+export const BATTERY_TYPES_LIST = [
+  {
+    label: 'Li-ion',
+    id: 1,
+  },
+  {
+    label: 'LiPo',
+    id: 2,
+  },
+  {
+    label: 'LiFePO4',
+    id: 3,
+  },
+  {
+    label: 'LTO',
+    id: 4,
+  }
+];
 
+export const BATTERY_SIZE_LIST = {
+  'Li-ion': [
+    {
+      label: '10440',
+      size: {
+        width: 10,
+        height: 10,
+        length: 440,
+      }
+    },
+    {
+      label: '14430',
+      size: {
+        width: 14,
+        height: 14,
+        length: 430,
+      }
+    },
+    {
+      label: '14500',
+      size: {
+        width: 14,
+        height: 14,
+        length: 500,
+      }
+    },
+    {
+      label: '14650',
+      size: {
+        width: 14,
+        height: 14,
+        length: 650,
+      }
+    },
+    {
+      label: '17500',
+      size: {
+        width: 17,
+        height: 17,
+        length: 500,
+      }
+    },
+    {
+      label: '18650',
+      size: {
+        width: 18,
+        height: 18,
+        length: 650,
+      }
+    },
+    {
+      label: '20700',
+      size: {
+        width: 20,
+        height: 20,
+        length: 700,
+      }
+    },
+    {
+      label: '21700',
+      size: {
+        width: 21,
+        height: 21,
+        length: 700,
+      }
+    },
+  ],
+
+};
 
 export const PACK_CALCULATION = {
   batteriesType: BATTERIES_TYPES.LI_ION

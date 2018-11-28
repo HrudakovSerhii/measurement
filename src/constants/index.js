@@ -37,7 +37,107 @@ export const BATTERIES_TYPES = {
   PB: 'PB'
 };
 
+<<<<<<< Updated upstream
 
+=======
+export const BATTERY_TYPES_LIST = [
+  {
+    label: 'Li-ion',
+    id: 1,
+  },
+  {
+    label: 'LiPo',
+    id: 2,
+  },
+  {
+    label: 'LiFePO4',
+    id: 3,
+  },
+  {
+    label: 'LTO',
+    id: 4,
+  }
+];
+
+export const LI_ION_SIZE_LIST = [
+  {
+    label: '18650',
+    id: 1,
+    size: {
+      width: 18,
+      height: 18,
+      length: 650,
+    }
+  },
+  {
+    label: '10440',
+    id: 2,
+    size: {
+      width: 10,
+      height: 10,
+      length: 440,
+    }
+  },
+  {
+    label: '14430',
+    id: 3,
+    size: {
+      width: 14,
+      height: 14,
+      length: 430,
+    }
+  },
+  {
+    label: '14500',
+    id: 4,
+    size: {
+      width: 14,
+      height: 14,
+      length: 500,
+    }
+  },
+  {
+    label: '14650',
+    id: 5,
+    size: {
+      width: 14,
+      height: 14,
+      length: 650,
+    }
+  },
+  {
+    label: '17500',
+    id: 6,
+    size: {
+      width: 17,
+      height: 17,
+      length: 500,
+    }
+  },
+  {
+    label: '20700',
+    id: 7,
+    size: {
+      width: 20,
+      height: 20,
+      length: 700,
+    }
+  },
+  {
+    label: '21700',
+    id: 8,
+    size: {
+      width: 21,
+      height: 21,
+      length: 700,
+    }
+  }
+];
+
+export const BATTERY_SIZE_LIST = {
+  1: LI_ION_SIZE_LIST,
+};
+>>>>>>> Stashed changes
 
 export const PACK_CALCULATION = {
   batteriesType: BATTERIES_TYPES.LI_ION

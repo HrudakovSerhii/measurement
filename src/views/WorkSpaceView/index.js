@@ -22,14 +22,19 @@ export default class WorkspaceView extends React.Component {
 
   render() {
     const className = 'workspace-view-c ' + this.props.position;
-    const levelControlStyle = {
+    const horizontalLCStyle = {
       width: '200px',
       height: '40px'
+    };
+    const verticalLCStyle = {
+      width: '40px',
+      height: '200px'
     };
 
     return (
       <div className={className}>
-        <LevelControl style={levelControlStyle} enabled minValue={1} maxValue={5} currentValue={3} />
+        <LevelControl style={horizontalLCStyle} enabled minValue={1} maxValue={5} currentValue={3} type="horizontal" />
+        <LevelControl style={verticalLCStyle} enabled minValue={1} maxValue={5} currentValue={3} type="vertical" />
       </div>
     );
   }

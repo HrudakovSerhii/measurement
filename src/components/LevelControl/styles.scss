@@ -3,37 +3,19 @@
  */
 
 .LevelControlContainer {
+  margin: 10px;
 
   .variants-list {
     display: flex;
-    flex-direction: row;
 
     .element-c {
       position: relative;
-      text-align: center;
-
 
       &:after {
         position: absolute;
         content: '';
         width: 100%;
         height: 100%;
-        top: 100%;
-        left: 0;
-        text-align: center;
-        border-top: white solid 2px;
-      }
-
-      &.current:before {
-        position: absolute;
-        content: '';
-        width: 100%;
-        height: 100%;
-        top: 100%;
-        left: 0;
-        border: white solid 2px;
-        background-color: grey;
-        cursor: pointer;
       }
 
       &.start:after {
@@ -43,15 +25,63 @@
       &.end:after {
         content: 'Max';
       }
+
+      &.current:before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-color: grey;
+        border: white solid 2px;
+        cursor: pointer;
+      }
     }
 
     &.horizontal .element-c {
-      display: inline-block;
+      text-align: center;
       flex: 1;
+
+      &:after {
+        top: 100%;
+        left: 0;
+        text-align: center;
+        border-top: white solid 2px;
+      }
+
+      &.current:before {
+        top: 100%;
+        left: 0;
+      }
     }
 
     &.vertical {
+      flex-direction: column;
 
+      height: 100%;
+
+      .element-c {
+        display: flex;
+        flex-direction: column;
+        width: 20px;
+        height: 100%;
+        padding-right: 5px;
+        text-align: right;
+        justify-content: center;
+
+        &:after {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          top: 0;
+          left: 100%;
+          padding-left: 5px;
+          border-left: white solid 2px;
+        }
+
+        &.current:before {
+          left: 100%;
+        }
+      }
     }
   }
 }

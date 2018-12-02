@@ -24,10 +24,8 @@ export default class WorkspaceView extends React.Component {
     const className = 'workspace-view-c ' + this.props.position;
     const horizontalLCStyle = {
       width: '200px',
-      height: '40px'
     };
     const verticalLCStyle = {
-      width: '40px',
       height: '200px'
     };
 

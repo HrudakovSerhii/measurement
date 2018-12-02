@@ -11,52 +11,58 @@
     .element-c {
       position: relative;
 
-      &:after {
+      &:before {
         position: absolute;
         content: '';
         width: 100%;
         height: 100%;
       }
 
-      &.start:after {
+      &.start:before {
         content: 'Min';
       }
 
-      &.end:after {
+      &.end:before {
         content: 'Max';
       }
 
-      &.current:before {
+      &.current:after {
         position: absolute;
         content: '';
-        width: 100%;
-        height: 100%;
+        width: 10px;
+        height: 10px;
         background-color: grey;
         border: white solid 2px;
+        border-radius: 45%;
         cursor: pointer;
       }
     }
 
-    &.horizontal .element-c {
-      text-align: center;
-      flex: 1;
+    &.horizontal {
+      padding-bottom: 30px;
 
-      &:after {
-        top: 100%;
-        left: 0;
+      .element-c {
         text-align: center;
-        border-top: white solid 2px;
-      }
+        flex: 1;
+        padding-bottom: 10px;
 
-      &.current:before {
-        top: 100%;
-        left: 0;
+        &:before {
+          top: 100%;
+          left: 0;
+          text-align: center;
+          border-top: white solid 2px;
+          padding-top: 10px;
+        }
+
+        &.current:after {
+          bottom: -8px;
+          right: 13px;
+        }
       }
     }
 
     &.vertical {
       flex-direction: column;
-
       height: 100%;
 
       .element-c {
@@ -64,22 +70,25 @@
         flex-direction: column;
         width: 20px;
         height: 100%;
-        padding-right: 5px;
+        padding-right: 10px;
         text-align: right;
         justify-content: center;
 
-        &:after {
+        &:before {
           display: flex;
           flex-direction: column;
           justify-content: center;
           top: 0;
           left: 100%;
-          padding-left: 5px;
+          padding-left: 10px;
           border-left: white solid 2px;
         }
 
-        &.current:before {
-          left: 100%;
+        &.current:after {
+          right: -8px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
         }
       }
     }

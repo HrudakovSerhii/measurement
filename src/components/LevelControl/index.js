@@ -54,7 +54,7 @@ class LevelControl extends React.Component {
 
   getElementContainer(className, value, onClickCallback) {
     return (
-      <div key={`reg-${value}`} onClick={onClickCallback} className={`${className} element-c`}>
+      <div key={`reg-${value}`} onClick={onClickCallback} className={`${className} element-c noSelect`}>
         { value }
       </div>
     )
@@ -119,7 +119,8 @@ LevelControl.propTypes = {
   maxValue: PropTypes.number,
   currentValue: PropTypes.number,
   enabled: PropTypes.bool,
-  style: PropTypes.object
+  style: PropTypes.object,
+  onValueChanged: PropTypes.func,
 };
 
 export default LevelControl;

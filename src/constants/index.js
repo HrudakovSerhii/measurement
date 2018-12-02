@@ -37,9 +37,6 @@ export const BATTERIES_TYPES = {
   PB: 'PB'
 };
 
-<<<<<<< Updated upstream
-
-=======
 export const BATTERY_TYPES_LIST = [
   {
     label: 'Li-ion',
@@ -133,11 +130,6 @@ export const LI_ION_SIZE_LIST = [
     }
   }
 ];
-
-export const BATTERY_SIZE_LIST = {
-  1: LI_ION_SIZE_LIST,
-};
->>>>>>> Stashed changes
 
 export const PACK_CALCULATION = {
   batteriesType: BATTERIES_TYPES.LI_ION

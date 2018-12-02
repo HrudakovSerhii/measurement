@@ -10,8 +10,8 @@ import './styles.css';
 
 import { changePosition } from './actions'
 
-// import { MenuDropDown } from '../../components/Menu';
-import MenuDropDown from './../../components/Menu/MenuDropDown';
+// import { MenuDropDown } from '../../components/MenuDropDown';
+import MenuDropDown from '../../components/MenuDropDown/index';
 import { FILE_MENU } from './../../constants';
 
 class SettingsView extends React.Component {

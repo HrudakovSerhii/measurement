@@ -6,7 +6,7 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-import './styles.scss';
+// import './styles.scss';
 
 class DropDownSelect extends React.Component {
   render() {

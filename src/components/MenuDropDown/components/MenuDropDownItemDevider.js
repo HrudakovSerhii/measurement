@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import './styles.scss';
+import '../styles.scss';
 
 export default class MenuDropDownItemDevider extends React.Component {
   render() {

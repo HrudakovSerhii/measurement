@@ -4,6 +4,8 @@
 
 import React from 'react';
 
+import { LevelControl } from '../../components';
+
 import './styles.css';
 
 export default class WorkspaceView extends React.Component {
@@ -20,10 +22,14 @@ export default class WorkspaceView extends React.Component {
 
   render() {
     const className = 'workspace-view-c ' + this.props.position;
+    const levelControlStyle = {
+      width: '200px',
+      height: '40px'
+    };
 
     return (
       <div className={className}>
-
+        <LevelControl style={levelControlStyle} enabled minValue={1} maxValue={5} currentValue={3} />
       </div>
     );
   }

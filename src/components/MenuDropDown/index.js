@@ -7,9 +7,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import MenuDropDownItem from './MenuDropDownItem';
-import MenuDropDownOptionItem from './MenuDropDownOptionItem';
-import MenuDropDownItemDevider from './MenuDropDownItemDevider';
+import MenuDropDownItem from './components/MenuDropDownItem';
+import MenuDropDownOptionItem from './components/MenuDropDownOptionItem';
+import MenuDropDownItemDevider from './components/MenuDropDownItemDevider';
 
 // Constants
 import { MENU_TYPES } from './../../constants';
@@ -17,12 +17,7 @@ import { MENU_TYPES } from './../../constants';
 // Styles
 import './styles.scss';
 
-export default class MenuDropDown extends React.Component {
-  static propTypes = {
-    items: PropTypes.array.isRequired,
-    title: PropTypes.string.isRequired,
-  };
-
+class MenuDropDown extends React.Component {
   constructor(props) {
     super(props);
 
@@ -106,3 +101,10 @@ export default class MenuDropDown extends React.Component {
     );
   }
 }
+
+MenuDropDown.propTypes =  {
+  items: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
+};
+
+export default MenuDropDown;

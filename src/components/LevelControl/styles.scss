@@ -1,0 +1,57 @@
+/**
+ * Created by Serhiy on 11/28/18
+ */
+
+.LevelControlContainer {
+
+  .variants-list {
+    display: flex;
+    flex-direction: row;
+
+    .element-c {
+      position: relative;
+      text-align: center;
+
+
+      &:after {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        top: 100%;
+        left: 0;
+        text-align: center;
+        border-top: white solid 2px;
+      }
+
+      &.current:before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 100%;
+        top: 100%;
+        left: 0;
+        border: white solid 2px;
+        background-color: grey;
+        cursor: pointer;
+      }
+
+      &.start:after {
+        content: 'Min';
+      }
+
+      &.end:after {
+        content: 'Max';
+      }
+    }
+
+    &.horizontal .element-c {
+      display: inline-block;
+      flex: 1;
+    }
+
+    &.vertical {
+
+    }
+  }
+}

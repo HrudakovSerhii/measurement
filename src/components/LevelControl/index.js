@@ -66,12 +66,7 @@ class LevelControl extends React.Component {
     const { minValue, maxValue } = this.props;
 
     if (minValue < this.state.currentValue) {
-      const currentValue = this.state.currentValue - 1;
-
-      this.setState({
-        currentValue,
-        optionList: this.createOptionList(minValue, maxValue, currentValue),
-      })
+      this.onValueChange(minValue, maxValue, this.state.currentValue - 1);
     }
   }
 
@@ -81,13 +76,15 @@ class LevelControl extends React.Component {
     const { minValue, maxValue } = this.props;
 
     if (maxValue > this.state.currentValue) {
-      const currentValue = this.state.currentValue + 1;
-
-      this.setState({
-        currentValue,
-        optionList: this.createOptionList(minValue, maxValue, currentValue),
-      })
+      this.onValueChange(minValue, maxValue, this.state.currentValue + 1);
     }
+  }
+
+  onValueChange(minValue, maxValue, currentValue) {
+    this.setState({
+      currentValue,
+      optionList: this.createOptionList(minValue, maxValue, currentValue),
+    })
   }
 
   onCurrentClick(e) {

@@ -56,7 +56,8 @@
 
         &.current:after {
           bottom: -8px;
-          right: 13px;
+          margin-right: -8px;
+          right: 50%;
         }
       }
     }

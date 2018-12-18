@@ -3,6 +3,10 @@
  */
 import workSpaceState from '../views/WorkSpaceView/constants';
 
+export const POSITION = {
+  HORIZONTAL: 'HORIZONTAL',
+};
+
 export const TOOL_BAR_POSITION = {
   LEFT: 'left',
   RIGHT: 'right',

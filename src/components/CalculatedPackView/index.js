@@ -18,6 +18,8 @@ class CalculatedPackView extends React.Component {
     }
   }
 
+  renderHorisontalLine
+
   render() {
     return (
       <div className="CalculatedPackViewContainer">

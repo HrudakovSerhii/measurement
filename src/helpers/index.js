@@ -1,7 +1,8 @@
 /**
  * Created by Serhiy on 12/17/18.
  */
+import { COEFFICIENT } from './../constants';
 
 export function sizeTranslator(size) {
-  return size * 1.1;
+  return size * COEFFICIENT;
 }

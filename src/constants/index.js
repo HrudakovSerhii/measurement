@@ -141,115 +141,131 @@ export const POSITION = {
   HORIZONTAL: 'HORIZONTAL',
 };
 
+export const COEFFICIENT = 1.5;
+
 /*
  * App batteries constants
  */
-export const LI_ION_PARAMS_LIST = [
-  {
-    label: '18650',
+// TODO: Update list according to the new structure
+export const LI_ION_PARAMS_LIST = {
+  '18650': {
     id: 1,
     size: {
       width: 18,
-      height: 18,
-      length: 650,
-    }
-  },
-  {
-    label: '10440',
-    id: 2,
-    size: {
-      width: 10,
-      height: 10,
-      length: 440,
-    }
-  },
-  {
-    label: '14430',
-    id: 3,
-    size: {
-      width: 14,
-      height: 14,
-      length: 430,
-    }
-  },
-  {
-    label: '14500',
-    id: 4,
-    size: {
-      width: 14,
-      height: 14,
-      length: 500,
-    }
-  },
-  {
-    label: '14650',
-    id: 5,
-    size: {
-      width: 14,
-      height: 14,
-      length: 650,
-    }
-  },
-  {
-    label: '17500',
-    id: 6,
-    size: {
-      width: 17,
-      height: 17,
-      length: 500,
-    }
-  },
-  {
-    label: '20700',
-    id: 7,
-    size: {
-      width: 20,
-      height: 20,
-      length: 700,
-    }
-  },
-  {
-    label: '21700',
-    id: 8,
-    size: {
-      width: 21,
-      height: 21,
-      length: 700,
+      length: 18,
+      height: 65,
+    },
+    info: {
+      current: 20,
+      power: 3000,
     }
   }
-];
+};
+
+// TODO: Update size option
+// export const LI_ION_PARAMS_LIST = [
+//   {
+//     format: '18650',
+//     size: {
+//       width: 18,
+//       length: 18,
+//       height: 65,
+//     }
+//   },
+//   {
+//     format: '10440',
+//     size: {
+//       width: 10,
+//       height: 10,
+//       length: 440,
+//     }
+//   },
+//   {
+//     format: '14430',
+//     size: {
+//       width: 14,
+//       height: 14,
+//       length: 430,
+//     }
+//   },
+//   {
+//     format: '14500',
+//     size: {
+//       width: 14,
+//       height: 14,
+//       length: 500,
+//     }
+//   },
+//   {
+//     format: '14650',
+//     size: {
+//       width: 14,
+//       height: 14,
+//       length: 650,
+//     }
+//   },
+//   {
+//     format: '17500',
+//     size: {
+//       width: 17,
+//       height: 17,
+//       length: 500,
+//     }
+//   },
+//   {
+//     format: '20700',
+//     size: {
+//       width: 20,
+//       height: 20,
+//       length: 700,
+//     }
+//   },
+//   {
+//     format: '21700',
+//     size: {
+//       width: 21,
+//       height: 21,
+//       length: 700,
+//     }
+//   }
+// ];
 export const LI_PO_PARAMS_LIST = [
   {
-    label: '18650',
+    format: '18650',
     id: 1,
     size: {
       width: 18,
       height: 18,
       length: 650,
-    }
+    },
   }
 ];
 
-export const BATTERY_TYPES_LIST = [
-  {
-    label: 'Li-ion',
-    id: 1,
-    batteriesParams: LI_ION_PARAMS_LIST,
-  },
-  {
-    label: 'LiPo',
-    id: 2,
-    batteriesParams: LI_PO_PARAMS_LIST,
-  },
-  {
-    label: 'LiFePO4',
-    id: 3,
-  },
-  {
-    label: 'LTO',
-    id: 4,
-  }
-];
+// TODO: Update list according to the new structure
+export const BATTERY_TYPES_LIST = {
+  'Li-ion': LI_ION_PARAMS_LIST
+};
+
+// export const BATTERY_TYPES_LIST = [
+//   {
+//     type: 'Li-ion',
+//     id: 1,
+//     params: LI_ION_PARAMS_LIST,
+//   },
+//   {
+//     type: 'LiPo',
+//     id: 2,
+//     params: LI_PO_PARAMS_LIST,
+//   },
+//   {
+//     type: 'LiFePO4',
+//     id: 3,
+//   },
+//   {
+//     type: 'LTO',
+//     id: 4,
+//   }
+// ];
 
 
 export const BATTERIES_CALCULATION = {

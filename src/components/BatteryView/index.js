@@ -51,10 +51,10 @@ export default class extends React.Component {
         <BatteryFaceView id={id} width={size.width} height={height} type={type} format={format} showInfo={showInfo} info={info} />
       );
       case VIEW_TYPE.TOP: return (
-        <BatteryTopView id={id} width={size.width} height={height} type={type} format={format} />
+        <BatteryTopView id={id} width={size.width} height={height} format={format} />
       );
       case VIEW_TYPE.BOTTOM: return (
-        <BatteryBottomView id={id} width={size.width} height={height} type={type} format={format} />
+        <BatteryBottomView id={id} width={size.width} height={height} format={format} />
       );
       default:
         return (

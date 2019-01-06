@@ -13,6 +13,8 @@ import { sizeTranslator as st }  from '../../../helpers';
 
 export default class extends React.Component {
   static propTypes = {
+    width: PropTypes.number,
+    height: PropTypes.number,
     type: PropTypes.string.isRequired,
     format: PropTypes.string.isRequired,
     showInfo: PropTypes.bool,
@@ -33,11 +35,16 @@ export default class extends React.Component {
   }
 
   render() {
-    const { type, format, showInfo, info } = this.props;
+    const { id, width, height, type, format, showInfo, info } = this.props;
     const { power, current } = info;
 
+    const batteryStyle = {
+      width: `${st(width)}px`,
+      height: `${st(height)}px`,
+    };
+
     return (
-      <div>
+      <div id={id} style={batteryStyle} className="battery-c">
         <img alt="battery-head" src={`../images/${format}-Head.png`} />
         <div className="battery-b-c">
           <img alt="battery-body" src={`../images/${format}-Body.png`} />

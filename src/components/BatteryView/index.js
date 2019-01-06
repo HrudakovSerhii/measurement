@@ -11,8 +11,6 @@ import BatteryBottomView from './components/BatteryBottomView';
 
 import PropTypes from 'prop-types';
 
-import { sizeTranslator as st }  from '../../helpers';
-
 import './styles.scss';
 
 import { VIEW_TYPE, BATTERY_TYPES_LIST } from '../../constants';
@@ -48,30 +46,21 @@ export default class extends React.Component {
 
     const height = viewType === VIEW_TYPE.FACE ? size.height : size.length;
 
-    const batteryStyle = {
-      width: `${st(size.width)}px`,
-      height: `${st(height)}px`,
-    };
-
-    let batteryView;
-
     switch(viewType) {
-      case VIEW_TYPE.FACE: batteryView = (
-        <BatteryFaceView type={type} format={format} showInfo={showInfo} info={info} />
-      ); break;
-      case VIEW_TYPE.TOP: batteryView = (
-        <BatteryTopView type={type} format={format} />
-      ); break;
-      case VIEW_TYPE.BOTTOM: batteryView = (
-        <BatteryBottomView type={type} format={format} />
-      ); break;
+      case VIEW_TYPE.FACE: return (
+        <BatteryFaceView id={id} width={size.width} height={height} type={type} format={format} showInfo={showInfo} info={info} />
+      );
+      case VIEW_TYPE.TOP: return (
+        <BatteryTopView id={id} width={size.width} height={height} type={type} format={format} />
+      );
+      case VIEW_TYPE.BOTTOM: return (
+        <BatteryBottomView id={id} width={size.width} height={height} type={type} format={format} />
+      );
+      default:
+        return (
+          <BatteryFaceView id={id} width={size.width} height={height} type={type} format={format} showInfo={showInfo} info={info} />
+        );
     }
-
-    return (
-      <div id={id} style={batteryStyle} className="battery-c">
-        { batteryView }
-      </div>
-    )
   }
 
   renderSchemaView(type, data) {

@@ -6,7 +6,7 @@ import InputField from './InputField';
 import LevelControl from './LevelControl';
 import MenuDropDown from './MenuDropDown';
 import CalculatedPackView from './CalculatedPackView';
-import BatteryFaceView from './BatteryFaceView';
+import BatteryView from './BatteryView';
 
 export {
   DropDownSelect,
@@ -14,5 +14,5 @@ export {
   InputField,
   LevelControl,
   CalculatedPackView,
-  BatteryFaceView,
+  BatteryView,
 }

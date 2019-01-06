@@ -141,7 +141,15 @@ export const POSITION = {
   HORIZONTAL: 'HORIZONTAL',
 };
 
+export const VIEW_TYPE = {
+  TOP: "TOP",
+  BOTTOM: "BOTTOM",
+  FACE: "FACE",
+};
+
 export const COEFFICIENT = 1.5;
+
+export const BATTERY_LABEL_BASE_FONT_SIZE = 5;
 
 /*
  * App batteries constants

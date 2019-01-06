@@ -11,7 +11,9 @@ import WorkSpaceView from './views/WorkSpaceView';
 import ToolsView from './views/ToolsView';
 import SettingsView from './views/SettingsView';
 
-import { BatteryFaceView } from './components';
+import { BatteryView } from './components';
+
+import { VIEW_TYPE } from './constants';
 
 class App extends React.Component {
   constructor(props) {
@@ -41,7 +43,7 @@ class App extends React.Component {
         <SettingsView themeType={this.state.appState.themeType}
                       language={this.state.appState.language}
                       toolbarPosition={position} />
-        <BatteryFaceView visible type="Li-ion" format="18650" packNumber={1} />
+        <BatteryView visible type="Li-ion" format="18650" viewType={VIEW_TYPE.FACE} packNumber={1} />
       </div>
     );
   }

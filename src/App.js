@@ -1,49 +1,47 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import propTypes from 'prop-types';
+// import propTypes from 'prop-types';
 
 import './styles/app.scss';
 import './styles/index.scss';
 
-import WorkSpaceView from './views/WorkSpaceView';
+// import WorkSpaceView from './views/WorkSpaceView';
+//
+// import ToolsView from './views/ToolsView';
+// import SettingsView from './views/SettingsView';
 
-import ToolsView from './views/ToolsView';
-import SettingsView from './views/SettingsView';
-
-import { BatteryView } from './components';
-
-import { VIEW_TYPE } from './constants';
+import SimpleCalculationScreen from './screens/SimpleCalculationScreen';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      appState: props.appState,
-      toolsState: props.toolsState,
-      calculationState: props.calculationState,
-      workSpaceState: props.workSpaceState
+      // appState: props.appState,
+      // toolsState: props.toolsState,
+      // calculationState: props.calculationState,
+      // workSpaceState: props.workSpaceState
     };
   }
 
   render() {
-    const position = this.props.toolbarPosition;
+    // const position = this.props.toolbarPosition;
 
     return (
       <div className="app-c">
-        <div className="work-space-c">
-          <ToolsView position={position} toolsTypes={this.state.toolsState.toolsTypes} tools={this.state.toolsState.tools} />
-          <WorkSpaceView position={position}
-                         type={this.state.workSpaceState.type}
-                         mode={this.state.workSpaceState.mode}
-                         view={this.state.workSpaceState.view}
-                         quality={this.state.workSpaceState.quality} />
-        </div>
-        <SettingsView themeType={this.state.appState.themeType}
-                      language={this.state.appState.language}
-                      toolbarPosition={position} />
-        <BatteryView visible type="Li-ion" format="18650" viewType={VIEW_TYPE.FACE} packNumber={1} />
+        {/*<div className="work-space-c">*/}
+          {/*<ToolsView position={position} toolsTypes={this.state.toolsState.toolsTypes} tools={this.state.toolsState.tools} />*/}
+          {/*<WorkSpaceView position={position}*/}
+                         {/*type={this.state.workSpaceState.type}*/}
+                         {/*mode={this.state.workSpaceState.mode}*/}
+                         {/*view={this.state.workSpaceState.view}*/}
+                         {/*quality={this.state.workSpaceState.quality} />*/}
+        {/*</div>*/}
+        {/*<SettingsView themeType={this.state.appState.themeType}*/}
+                      {/*language={this.state.appState.language}*/}
+                      {/*toolbarPosition={position} />*/}
+        <SimpleCalculationScreen />
       </div>
     );
   }
@@ -62,10 +60,10 @@ function mapDispatchToProps(dispatch) {
 }
 
 App.propTypes = {
-  appState: propTypes.object.isRequired,
-  toolsState: propTypes.object.isRequired,
-  calculationState: propTypes.object.isRequired,
-  workSpaceState: propTypes.object.isRequired
+  // appState: propTypes.object.isRequired,
+  // toolsState: propTypes.object.isRequired,
+  // calculationState: propTypes.object.isRequired,
+  // workSpaceState: propTypes.object.isRequired
 };
 
 App = connect(

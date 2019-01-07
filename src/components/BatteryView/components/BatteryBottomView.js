@@ -17,14 +17,14 @@ export default class extends React.Component {
   };
 
   render() {
-    const { id, width, height, format } = this.props;
+    const { width, height, format } = this.props;
     const batteryStyle = {
       width: `${st(width)}px`,
       height: `${st(height)}px`,
     };
 
     return (
-      <div id={id} style={batteryStyle} className="battery-c">
+      <div style={batteryStyle} className="battery-c">
         <img alt="battery-bottom" src={`../images/${format}-Bottom.png`} />
       </div>
     );

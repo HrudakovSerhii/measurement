@@ -1,7 +1,6 @@
 /**
  * Created by Serhiy on 03.10.18.
  */
-import workSpaceState from '../views/WorkSpaceView/constants';
 
 /*
  * App settings constants
@@ -149,172 +148,149 @@ export const VIEW_TYPE = {
 
 export const COEFFICIENT = 1.5;
 
+// TODO: Think about using normal css zoom without js dynamic styles adjustments
 export const BATTERY_LABEL_BASE_FONT_SIZE = 5;
 
 /*
  * App batteries constants
  */
-// TODO: Update list according to the new structure
-export const LI_ION_PARAMS_LIST = {
-  '18650': {
+// TODO: Think about default batteries info data
+
+/**
+ * Represents a battery types
+ * return values:
+ * id - id of the battery format
+ * type {string} - type of the battery chemistry
+ * info {object} - default information for specific battery format (current, voltage, power)
+ */
+export const BATTERIES_TYPES_LIST = [
+  {
     id: 1,
+    label: 'Li-ion',
+    type: 'Li-ion',
+  },
+  {
+    id: 2,
+    label: 'LiPo',
+    type: 'LiPo',
+  },
+  {
+    id: 3,
+    label: 'LiFePO4',
+    type: 'LiFePO4',
+  },
+  {
+    id: 4,
+    label: 'LTO',
+    type: 'LTO',
+  }
+];
+
+/**
+ * Represents a battery formats
+ * return values:
+ * id - id of the battery format
+ * format {string} - format value label
+ * types {array} - list of battery type id's that are available in this format
+ * size {object} - size object of the battery for specific format (real size in mm). Include height, width, length
+ * info {object} - default information for specific battery format (current, voltage, power)
+ */
+export const BATTERIES_FORMAT_LIST = [
+  {
+    id: 1,
+    label: '18650',
+    format: '18650',
+    types: [1,2,3,4],
     size: {
       width: 18,
       length: 18,
       height: 65,
     },
-    info: {
-      current: 20,
-      power: 3000,
-    }
-  }
-};
-
-// TODO: Update size option
-// export const LI_ION_PARAMS_LIST = [
-//   {
-//     format: '18650',
-//     size: {
-//       width: 18,
-//       length: 18,
-//       height: 65,
-//     }
-//   },
-//   {
-//     format: '10440',
-//     size: {
-//       width: 10,
-//       height: 10,
-//       length: 440,
-//     }
-//   },
-//   {
-//     format: '14430',
-//     size: {
-//       width: 14,
-//       height: 14,
-//       length: 430,
-//     }
-//   },
-//   {
-//     format: '14500',
-//     size: {
-//       width: 14,
-//       height: 14,
-//       length: 500,
-//     }
-//   },
-//   {
-//     format: '14650',
-//     size: {
-//       width: 14,
-//       height: 14,
-//       length: 650,
-//     }
-//   },
-//   {
-//     format: '17500',
-//     size: {
-//       width: 17,
-//       height: 17,
-//       length: 500,
-//     }
-//   },
-//   {
-//     format: '20700',
-//     size: {
-//       width: 20,
-//       height: 20,
-//       length: 700,
-//     }
-//   },
-//   {
-//     format: '21700',
-//     size: {
-//       width: 21,
-//       height: 21,
-//       length: 700,
-//     }
-//   }
-// ];
-export const LI_PO_PARAMS_LIST = [
+  },
   {
-    format: '18650',
-    id: 1,
+    id: 2,
+    label: '10440',
+    format: '10440',
+    types: [1,2,3,4],
     size: {
-      width: 18,
-      height: 18,
-      length: 650,
+      width: 10,
+      length: 10,
+      height: 44,
+
+    },
+  },
+  {
+    id: 3,
+    label: '14430',
+    format: '14430',
+    types: [1,2,3,4],
+    size: {
+      width: 14,
+      length: 14,
+      height: 43,
+    },
+  },
+  {
+    id: 4,
+    label: '14500',
+    format: '14500',
+    types: [1,2,3,4],
+    size: {
+      width: 14,
+      length: 14,
+      height: 50,
+    },
+  },
+  {
+    id: 5,
+    label: '14650',
+    format: '14650',
+    types: [1,2,3,4],
+    size: {
+      width: 14,
+      length: 14,
+      height: 65,
+    },
+  },
+  {
+    id: 6,
+    label: '17500',
+    format: '17500',
+    types: [1,2,3,4],
+    size: {
+      width: 17,
+      length: 17,
+      height: 50,
+    },
+  },
+  {
+    id: 7,
+    label: '20700',
+    format: '20700',
+    types: [1,2,3,4],
+    size: {
+      width: 20,
+      length: 20,
+      height: 70,
+    },
+  },
+  {
+    id: 8,
+    label: '21700',
+    format: '21700',
+    types: [1,2,3,4],
+    size: {
+      width: 21,
+      length: 70,
+      height: 21,
     },
   }
 ];
 
-// TODO: Update list according to the new structure
-export const BATTERY_TYPES_LIST = {
-  'Li-ion': LI_ION_PARAMS_LIST
-};
-
-// export const BATTERY_TYPES_LIST = [
-//   {
-//     type: 'Li-ion',
-//     id: 1,
-//     params: LI_ION_PARAMS_LIST,
-//   },
-//   {
-//     type: 'LiPo',
-//     id: 2,
-//     params: LI_PO_PARAMS_LIST,
-//   },
-//   {
-//     type: 'LiFePO4',
-//     id: 3,
-//   },
-//   {
-//     type: 'LTO',
-//     id: 4,
-//   }
-// ];
-
-
-export const BATTERIES_CALCULATION = {
-  containerSize: {
-    width: 100,
-    height: 50,
-    length: 40
-  },
-  electricParams: {
-    amps: 10,
-    maxAmp: 40,
+export const APP_STATE = {
+  appState: {
+    // themeType: THEME_TYPES.DEFAULT,
+    // language: LANGUAGES.DEFAULT,
+    // toolbarPosition: TOOL_BAR_POSITION.LEFT,
   }
 };
-
-export const APP_SETTINGS = {
-  appState: {
-    themeType: THEME_TYPES.DEFAULT,
-    language: LANGUAGES.DEFAULT,
-    toolbarPosition: TOOL_BAR_POSITION.LEFT,
-  },
-  toolsState: {
-    toolsTypes: TOOLS_TYPES.ELECTRIC,
-    tools: TOOLS.MEASUREMENT
-  },
-  calculationState: {
-    batteriesCalculation: {
-      // containerSize: BATTERIES_CALCULATION.containerSize,
-      // electricParams: BATTERIES_CALCULATION.electricParams
-    },
-    packCalculation: {
-
-    }
-  },
-  workSpaceState // TODO: this is how the props should be initialised
-  // settings: {
-  //
-  // }
-};
-
-const AppConstants = {
-  TOOL_BAR_POSITION
-};
-
-export default AppConstants;

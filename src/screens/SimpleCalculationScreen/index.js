@@ -1,29 +1,35 @@
 /**
  * Created by Serhiy on 11/12/18
+ * SimpleCalculationScreen component
  */
 
 import React from 'react';
 
 // libraries
 // import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 // components
-import { InputField, DropDownSelect } from './../../components';
+import { InputField, DropDownSelect, BatteryView } from './../../components';
 
 // constants
-import { BATTERY_TYPES_LIST, BATTERY_SIZE_LIST } from './../../constants';
+import { BATTERIES_TYPES_LIST, BATTERIES_FORMAT_LIST, VIEW_TYPE } from './../../constants';
 
-import './styles.scss';
+// import './styles.scss';
 
-class SimpleCalculationScreen extends React.Component {
+export default class extends React.Component {
+  static propTypes = {
+
+  };
+
   constructor(props) {
     super(props);
 
     this.state = {
       powerValue: undefined,
       currentValue: undefined,
-      batteryTypeId: undefined,
-      batteryFormatId: {},
+      batteryTypeId: 1,
+      batteryFormatId: null,
     };
   }
 
@@ -34,26 +40,31 @@ class SimpleCalculationScreen extends React.Component {
     })
   }
 
+  getBatteriesFormatList(typeId) {
+    return _.filter(BATTERIES_FORMAT_LIST, (item) => {
+      const { types } = item;
+      return _.includes(types, Number(typeId));
+    });
+  }
+
   render() {
-    const { userPowerValue, userCurrentValue, batteryTypeId } = this.state;
-    const batteryFormat = batteryTypeId && BATTERY_SIZE_LIST[batteryTypeId];
+    const { batteryTypeId, batteryFormatId } = this.state;
+    const batteriesFormatList = this.getBatteriesFormatList(batteryTypeId);
 
     return (
       <div className="SimpleCalculationScreenContainer">
         <InputField label={'Power (Watt/H)'} placeholder={'Input power value for target device'} onInput={(text) => this.setData('powerValue', text)}/>
         <InputField label={'Current (Volts)'} placeholder={'Input current value for target device'} onInput={(text) => this.setData('currentValue', text)}/>
-        <DropDownSelect label={'Choose your battery type'} dataList={BATTERY_TYPES_LIST} onChange={(type) => this.setData('batteryTypeId', type)}/>
-        <DropDownSelect label={'Choose your battery format'} dataList={batteryFormat} onChange={(size) => this.setData('batteryFormatId', size)}/>
+        <DropDownSelect label={'Choose your battery type'} dataList={BATTERIES_TYPES_LIST} onChange={(type) => this.setData('batteryTypeId', type)}/>
+        <DropDownSelect label={'Choose your battery format'} dataList={batteriesFormatList} onChange={(size) => this.setData('batteryFormatId', size)}/>
+        { batteryTypeId && batteryFormatId && (
+          <BatteryView id={1} visible typeId={batteryTypeId} format={batteryFormatId} viewType={VIEW_TYPE.TOP} packNumber={1} />
+        )}
       </div>
     );
   }
 }
 
-SimpleCalculationScreen.propTypes = {
-
-};
-
-export default SimpleCalculationScreen;
 //
 // 1. Потужність приладу що буде використовувати акамулятор (Ватт/годину - Watt/h) = 1500
 //

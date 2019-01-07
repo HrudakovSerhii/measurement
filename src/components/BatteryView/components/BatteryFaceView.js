@@ -15,10 +15,10 @@ export default class extends React.Component {
   static propTypes = {
     width: PropTypes.number,
     height: PropTypes.number,
-    type: PropTypes.string.isRequired,
+    type: PropTypes.string,
     format: PropTypes.string.isRequired,
     showInfo: PropTypes.bool,
-    info: PropTypes.object,
+    infoData: PropTypes.object,
   };
 
   renderInfoContainer(type, format, power, current) {
@@ -35,8 +35,8 @@ export default class extends React.Component {
   }
 
   render() {
-    const { id, width, height, type, format, showInfo, info } = this.props;
-    const { power, current } = info;
+    const { width, height, type, format, showInfo, infoData } = this.props;
+    const { power, current } = infoData;
 
     const batteryStyle = {
       width: `${st(width)}px`,
@@ -44,7 +44,7 @@ export default class extends React.Component {
     };
 
     return (
-      <div id={id} style={batteryStyle} className="battery-c">
+      <div style={batteryStyle} className="battery-c">
         <img alt="battery-head" src={`../images/${format}-Head.png`} />
         <div className="battery-b-c">
           <img alt="battery-body" src={`../images/${format}-Body.png`} />

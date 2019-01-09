@@ -6,20 +6,33 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-// import './styles.scss';
+import './styles.scss';
 
 class DropDownSelect extends React.Component {
+  getDataList(dataList) {
+    if (dataList.length && dataList[0].id) {
+      dataList.unshift({ id: 0, label: 'Select value'});
+    } else if (!dataList.length) {
+      dataList.push({ id: 0, label: 'Select value'});
+    }
+
+    return dataList;
+  }
+
   render() {
     const { label, dataList, onChange } = this.props;
 
-    const items = dataList && dataList.map((item) => {
+    const itemsDataList = this.getDataList(dataList);
+    const disabled = itemsDataList.length < 2;
+
+    const items = itemsDataList && itemsDataList.map((item) => {
       return <option key={item.id} value={item.id} className="select-item">{item.label}</option>
     });
 
     return (
       <div className="DropDownSelectContainer">
         <span className="label">{label}</span>
-        <select disabled={!items} onChange={(e) => onChange(e.target.value)}>{items}</select>
+        <select disabled={disabled} onChange={(e) => onChange(e.target.value)}>{items}</select>
       </div>
     );
   }

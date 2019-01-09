@@ -49,8 +49,11 @@ export default class extends React.Component {
   }
 
   renderBatteryView(typeId, formatId, viewType, infoVisible, infoData) {
-    const { type } = this.getDataFromId(BATTERIES_TYPES_LIST, typeId);
-    const { size, format } = this.getDataFromId(BATTERIES_FORMAT_LIST, formatId);
+    const typeObj = this.getDataFromId(BATTERIES_TYPES_LIST, typeId);
+    const formatObj = this.getDataFromId(BATTERIES_FORMAT_LIST, formatId);
+
+    const { type } = typeObj;
+    const { size, format } = formatObj;
 
     const height = viewType === VIEW_TYPE.FACE ? size.height : size.length;
 
@@ -76,6 +79,7 @@ export default class extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     const { id, visible, viewType, typeId, formatId, infoVisible, infoData } = this.props;
     const { schemeVisible, schemaType, schemaData } = this.props;
 

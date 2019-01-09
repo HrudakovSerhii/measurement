@@ -28,16 +28,24 @@ export default class extends React.Component {
     this.state = {
       powerValue: undefined,
       currentValue: undefined,
-      batteryTypeId: 1,
+      batteryTypeId: null,
       batteryFormatId: null,
     };
   }
 
   setData(key, value) {
-    console.log(value);
-    this.setState({
-      [key]: value
-    })
+    const nValue = Number(value);
+
+    if (key === 'batteryTypeId' && !nValue) {
+      this.setState({
+        batteryFormatId: null,
+        [key]: nValue,
+      })
+    } else {
+      this.setState({
+        [key]: nValue,
+      })
+    }
   }
 
   getBatteriesFormatList(typeId) {
@@ -50,15 +58,16 @@ export default class extends React.Component {
   render() {
     const { batteryTypeId, batteryFormatId } = this.state;
     const batteriesFormatList = this.getBatteriesFormatList(batteryTypeId);
+    console.log(batteryTypeId, batteryFormatId);
 
     return (
       <div className="SimpleCalculationScreenContainer">
         <InputField label={'Power (Watt/H)'} placeholder={'Input power value for target device'} onInput={(text) => this.setData('powerValue', text)}/>
         <InputField label={'Current (Volts)'} placeholder={'Input current value for target device'} onInput={(text) => this.setData('currentValue', text)}/>
         <DropDownSelect label={'Choose your battery type'} dataList={BATTERIES_TYPES_LIST} onChange={(type) => this.setData('batteryTypeId', type)}/>
-        <DropDownSelect label={'Choose your battery format'} dataList={batteriesFormatList} onChange={(size) => this.setData('batteryFormatId', size)}/>
+        <DropDownSelect label={'Choose your battery format'} dataList={batteriesFormatList} onChange={(format) => this.setData('batteryFormatId', format)}/>
         { batteryTypeId && batteryFormatId && (
-          <BatteryView id={1} visible typeId={batteryTypeId} format={batteryFormatId} viewType={VIEW_TYPE.TOP} packNumber={1} />
+          <BatteryView id={1} visible typeId={batteryTypeId} formatId={batteryFormatId} viewType={VIEW_TYPE.TOP} packNumber={1} />
         )}
       </div>
     );

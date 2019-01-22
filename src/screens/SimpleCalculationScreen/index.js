@@ -61,7 +61,7 @@ export default class extends React.Component {
   render() {
     const { batteryTypeId, batteryFormatId } = this.state;
     const batteriesFormatList = this.getBatteriesFormatList(batteryTypeId);
-
+    const n = 1;
     return (
       <div className="SimpleCalculationScreenContainer">
         <InputField label={'Power (Watt/H)'} placeholder={'Input power value for target device'} onInput={(text) => this.setData('powerValue', text)}/>
@@ -69,7 +69,7 @@ export default class extends React.Component {
         <DropDownSelect label={'Choose your battery type'} dataList={BATTERIES_TYPES_LIST} onChange={(type) => this.setData('batteryTypeId', type)}/>
         <DropDownSelect label={'Choose your battery format'} dataList={batteriesFormatList} onChange={(format) => this.setData('batteryFormatId', format)}/>
         { batteryTypeId && batteryFormatId && (
-          <BatteryPackView id={1}
+          <BatteryPackView id={n}
                            visible
                            viewType={VIEW_TYPE.FACE}
                            viewPosition={POSITION.VERTICAL}

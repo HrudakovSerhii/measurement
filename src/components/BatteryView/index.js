@@ -20,6 +20,7 @@ import { VIEW_TYPE, BATTERIES_TYPES_LIST, BATTERIES_FORMAT_LIST } from '../../co
 // TODO: Update info after detailed analise. Try to make them more informative.
 /**
  * Represents a battery view
+ * @param {string} id - string id of the battery view
  * @param {bool} visible - visibility of component
  * @param {bool} showInfo - visibility of battery info (controlled from redux state)
  * @param {string} viewType - type of battery view look. Face, Top or Bottom view of the battery
@@ -33,7 +34,7 @@ export default class extends React.Component {
   static propTypes = {
     visible: PropTypes.bool,
     viewType: PropTypes.string,
-    id: PropTypes.number,
+    id: PropTypes.string,
     typeId: PropTypes.number.isRequired,
     formatId: PropTypes.number.isRequired,
     infoVisible: PropTypes.bool,

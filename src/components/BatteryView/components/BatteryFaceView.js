@@ -36,7 +36,7 @@ export default class extends React.Component {
   render() {
     const { width, height, type, format, showInfo, info } = this.props;
     const { volts } = info;
-    const { nom, min, max } = volts;
+    const { nom } = volts;
 
     const batteryStyle = {
       width: `${st(width)}px`,

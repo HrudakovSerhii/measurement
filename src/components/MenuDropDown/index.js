@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 // Components
 import MenuDropDownItem from './components/MenuDropDownItem';
 import MenuDropDownOptionItem from './components/MenuDropDownOptionItem';
-import MenuDropDownItemDevider from './components/MenuDropDownItemDevider';
+import MenuDropDownItemDivider from './components/MenuDropDownItemDevider';
 
 // Constants
 import { MENU_TYPES } from './../../constants';
@@ -81,7 +81,7 @@ class MenuDropDown extends React.Component {
                                         selected={itemData.selected}
                                         disabled={type === MENU_TYPES.DISABLED} />);
       default:
-        return (<MenuDropDownItemDevider key={itemData.title} />);
+        return (<MenuDropDownItemDivider key={itemData.title} />);
     }
   }
 

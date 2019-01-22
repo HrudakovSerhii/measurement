@@ -6,10 +6,10 @@ import propTypes from 'prop-types';
 import './styles/app.scss';
 import './styles/index.scss';
 
-import WorkSpaceView from './views/WorkSpaceView';
-
-import ToolsView from './views/ToolsView';
-import SettingsView from './views/SettingsView';
+// import WorkSpaceView from './views/WorkSpaceView';
+//
+// import ToolsView from './views/ToolsView';
+// import SettingsView from './views/SettingsView';
 
 // import { changePosition } from './views/SettingsView/actions'
 
@@ -28,7 +28,7 @@ class App extends React.Component {
   }
 
   render() {
-    const position = this.props.toolbarPosition;
+    // const position = this.props.toolbarPosition;
 
     return (
       <div className="app-c">
@@ -62,10 +62,10 @@ function mapDispatchToProps(dispatch) {
 }
 
 App.propTypes = {
-  appState: propTypes.object.isRequired,
-  toolsState: propTypes.object.isRequired,
-  calculationState: propTypes.object.isRequired,
-  workSpaceState: propTypes.object.isRequired
+  appState: propTypes.object,
+  toolsState: propTypes.object,
+  calculationState: propTypes.object,
+  workSpaceState: propTypes.object
 };
 
 App = connect(

@@ -25,6 +25,12 @@ export const THEME_TYPES = {
 /*
  * App view constants
  */
+export const MENU_TYPES = {
+  ENABLED: 'ENABLED',
+  DISABLED: 'DISABLED',
+  HAS_OPTIONS: 'HAS_OPTIONS'
+};
+
 export const FILE_MENU = {
   TITLE: 'File',
   MENU: [
@@ -119,11 +125,7 @@ export const COMMANDS = {
   }
 };
 
-export const MENU_TYPES = {
-  ENABLED: 'ENABLED',
-  DISABLED: 'DISABLED',
-  HAS_OPTIONS: 'HAS_OPTIONS'
-};
+
 
 /*
  * App tools constants

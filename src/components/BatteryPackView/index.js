@@ -5,11 +5,10 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 
 import BatteryView from './../BatteryView';
 
-import { POSITION, BATTERIES_TYPES_LIST } from './../../constants';
+import { POSITION } from './../../constants';
 
 // import './styles.scss';
 
@@ -64,7 +63,9 @@ export default class BatteryPackView extends React.Component {
       const sLine = [];
 
       for (let s = 0; s < sValue; s += 1) {
-        sLine.push(<BatteryView id={`s${s + 1}p${p + 1}`} visible typeId={typeId} formatId={formatId} viewType={viewType} />)
+        const key = `s${s + 1}p${p + 1}`;
+
+        sLine.push(<BatteryView key={key} id={key} visible typeId={typeId} formatId={formatId} viewType={viewType} />)
       }
 
       pLine.push(
@@ -78,13 +79,13 @@ export default class BatteryPackView extends React.Component {
   }
 
   renderHorizontalView() {
-    const { S, P } = this.props;
-    const sLine = [];
-    const pLine = [];
-
-    for(let s = 0; s < S; s += 1) {
-
-    }
+    // const { S, P } = this.props;
+    // const sLine = [];
+    // const pLine = [];
+    //
+    // for(let s = 0; s < S; s += 1) {
+    //
+    // }
   }
 
   render() {

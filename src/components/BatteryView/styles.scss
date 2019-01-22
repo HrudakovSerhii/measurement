@@ -1,0 +1,26 @@
+/**
+ * Created by Serhiy on 12/6/18
+ */
+
+.BatteryViewContainer {
+  .battery-c {
+    position: relative;
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    .info-c {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      transform: translateY(-50%);
+
+      label {
+        display: block;
+        text-align: center;
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@
  * Created by Serhiy on 07.10.18.
  */
 
-import { PACK_CALCULATION, COMMANDS } from './../../../constants';
+import { COMMANDS } from './../../../constants';
 
 const getBatteriesSize = (params) => {
   return { width: 100, height: 40, length: 50};
@@ -18,7 +18,7 @@ const getBatteriesElectricParams = (params) => {
   }
 };
 
-const packCalculation = (state = PACK_CALCULATION, action) => {
+const packCalculation = (state, action) => {
   switch (action.type) {
     case COMMANDS.PACK_CALCULATION_COMMAND.BATTERIES_SIZE:
       return getBatteriesSize(action.params);

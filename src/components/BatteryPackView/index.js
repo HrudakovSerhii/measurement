@@ -68,8 +68,10 @@ export default class BatteryPackView extends React.Component {
         sLine.push(<BatteryView key={key} id={key} visible typeId={typeId} formatId={formatId} viewType={viewType} />)
       }
 
+      const key = `p${p + 1}`;
+
       pLine.push(
-        <div className="p-line-c" id={`p${p + 1}`}>
+        <div key={key} className="p-line-c" id={key}>
           { sLine }
         </div>
       );

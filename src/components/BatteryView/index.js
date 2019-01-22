@@ -7,15 +7,13 @@ import React from 'react';
 
 import _ from 'lodash';
 
-import BatteryFaceView from './components/BatteryFaceView';
-import BatteryTopView from './components/BatteryTopView';
-import BatteryBottomView from './components/BatteryBottomView';
-
 import PropTypes from 'prop-types';
+
+import { sizeTranslator as st }  from '../../helpers';
 
 import './styles.scss';
 
-import { VIEW_TYPE, BATTERIES_TYPES_LIST, BATTERIES_FORMAT_LIST } from '../../constants';
+import { VIEW_TYPE, BATTERIES_TYPES_LIST, BATTERIES_FORMAT_LIST, BATTERY_LABEL_BASE_FONT_SIZE } from '../../constants';
 
 // TODO: Update info after detailed analise. Try to make them more informative.
 /**
@@ -47,29 +45,57 @@ export default class extends React.Component {
     return _.find(array, (item) => item.id === id);
   }
 
-  renderBatteryView(typeId, formatId, viewType, infoVisible) {
-    const typeObj = this.getDataFromId(BATTERIES_TYPES_LIST, typeId);
-    const formatObj = this.getDataFromId(BATTERIES_FORMAT_LIST, formatId);
+  renderInfoContainer(type, format, power) {
+    const labelStyle = { fontSize: `${st(BATTERY_LABEL_BASE_FONT_SIZE)}px`};
 
-    const { type, info } = typeObj;
-    const { size, format } = formatObj;
+    return (
+      <div className="info-c">
+        <label style={labelStyle}>{type}</label>
+        <label style={labelStyle}>{format}</label>
+        <label style={labelStyle}>{power}</label>
+      </div>
+    );
+  }
 
-    const height = viewType === VIEW_TYPE.FACE ? size.height : size.length;
+  renderBatteryFaceView(type, format, infoVisible, info) {
+    const { volts } = info;
+    const { nom } = volts;
 
+    return (
+      <div className="battery-c">
+        <img alt="battery-head" src={`../images/${format}-Head.png`} />
+        <div className="battery-b-c">
+          <img alt="battery-body" src={`../images/${format}-Body.png`} />
+          { infoVisible && this.renderInfoContainer(type, format, nom) }
+        </div>
+        <img alt="battery-foot" src={`../images/${format}-Footer.png`} />
+      </div>
+    )
+  }
+
+  renderBatteryBottomView(format) {
+    return (
+      <div className="battery-c">
+        <img alt="battery-bottom" src={`../images/${format}-Bottom.png`} />
+      </div>
+    )
+  }
+
+  renderBatteryTopView(format) {
+    return (
+      <div className="battery-c">
+        <img alt="battery-top" src={`../images/${format}-Top.png`} />
+      </div>
+    )
+  }
+
+  renderBatteryView(type, format, viewType, infoVisible, info) {
     switch(viewType) {
-      case VIEW_TYPE.FACE: return (
-        <BatteryFaceView width={size.width} height={height} type={type} format={format} showInfo={infoVisible} info={info} />
-      );
-      case VIEW_TYPE.TOP: return (
-        <BatteryTopView width={size.width} height={height} format={format} />
-      );
-      case VIEW_TYPE.BOTTOM: return (
-        <BatteryBottomView width={size.width} height={height} format={format} />
-      );
+      case VIEW_TYPE.FACE  : return this.renderBatteryFaceView(type, format, infoVisible, info);
+      case VIEW_TYPE.TOP   : return this.renderBatteryTopView(format);
+      case VIEW_TYPE.BOTTOM: return this.renderBatteryBottomView(format);
       default:
-        return (
-          <BatteryFaceView width={size.width} height={height} type={type} format={format} showInfo={infoVisible} info={info} />
-        );
+        return this.renderBatteryFaceView(type, format, infoVisible, info);
     }
   }
 
@@ -81,11 +107,24 @@ export default class extends React.Component {
     const { id, visible, viewType, typeId, formatId, infoVisible } = this.props;
     const { schemeVisible, schemaType, schemaData } = this.props;
 
-    const renderedView = this.renderBatteryView(typeId, formatId, viewType, infoVisible);
+    const typeObj = this.getDataFromId(BATTERIES_TYPES_LIST, typeId);
+    const formatObj = this.getDataFromId(BATTERIES_FORMAT_LIST, formatId);
+
+    const { type, info } = typeObj;
+    const { size, format } = formatObj;
+
+    const height = viewType === VIEW_TYPE.FACE ? size.height : size.length;
+
+    const renderedView = this.renderBatteryView(type, format, viewType, infoVisible, info);
     const renderedSchemaView = this.renderSchemaView(schemaType, schemaData);
 
+    const batteryStyle = {
+      width: `${st(size.width)}px`,
+      height: `${st(height)}px`,
+    };
+
     return (
-      <div key={id} className="BatteryViewContainer">
+      <div key={id} style={batteryStyle} className="BatteryViewContainer">
         { visible && renderedView }
         { schemeVisible && renderedSchemaView }
       </div>

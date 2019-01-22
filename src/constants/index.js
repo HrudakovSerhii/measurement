@@ -138,6 +138,7 @@ export const COMMANDS = {
 
 export const POSITION = {
   HORIZONTAL: 'HORIZONTAL',
+  VERTICAL: 'VERTICAL',
 };
 
 export const VIEW_TYPE = {
@@ -168,22 +169,53 @@ export const BATTERIES_TYPES_LIST = [
     id: 1,
     label: 'Li-ion',
     type: 'Li-ion',
+    info: {
+      volts: {
+        nom: 3.7,
+        min: 2.8,
+        max: 4.2
+      }
+    }
   },
   {
     id: 2,
     label: 'LiPo',
     type: 'LiPo',
+    info: {
+      volts: {
+        nom: 3.7,
+        min: 3.0,
+        max: 4.2
+      }
+    }
   },
   {
     id: 3,
     label: 'LiFePO4',
     type: 'LiFePO4',
+    info: {
+      volts: {
+        nom: 3.2,
+        min: 2.8,
+        max: 4.2
+      },
+      charge: {
+        volts: 3.4,
+      }
+    }
   },
   {
     id: 4,
     label: 'LTO',
     type: 'LTO',
-  }
+    info: {
+      volts: {
+        nom: 3.2,
+        min: 2.8,
+        max: 4.2
+      },
+    }
+  },
 ];
 
 /**

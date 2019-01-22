@@ -9,29 +9,72 @@ import _ from 'lodash';
 
 import BatteryView from './../BatteryView';
 
-import { POSITION, BATTERY_TYPES_LIST } from './../../constants';
+import { POSITION, BATTERIES_TYPES_LIST } from './../../constants';
 
-import './styles.scss';
+// import './styles.scss';
 
-class BatteryPackView extends React.Component {
+/**
+ * Represents a battery Pack View
+ * @param {string} viewType - type of battery view look. Face, Top or Bottom view of the battery
+ * @param {string} viewPosition - type of battery pack view look. Horizontal or Vertical
+ * @param {number} packId - id of the pack (usable for picking pack from multiple pack block
+ * @param {number} typeId - type id of the battery (Li-Ion, NiMg, LTO ets)
+ * @param {number} formatId - form factor id of the battery (original physical size)
+ * @param {object} packPrefSize - preferable size of the pack (width, height, length)
+ * @param {number} packVoltage - preferable voltage of the pack (Volts)
+ * @param {number} packPower - preferable power of the pack (Ah)
+ * @param {number} packCurrent - preferable current of the pack (Ah)
+ * @param {number} pValue - number of parallel connected batteries
+ * @param {number} sValue - number of successively connected batteries
+ */
+export default class BatteryPackView extends React.Component {
+  static propTypes = {
+    viewType: PropTypes.string,
+    viewPosition: PropTypes.string,
+    packId: PropTypes.number,
+    typeId: PropTypes.number,
+    formatId: PropTypes.number,
+    packPrefSize: PropTypes.object,
+    packVoltage: PropTypes.number,
+    packPower: PropTypes.number,
+    packCurrent: PropTypes.number,
+    pValue: PropTypes.number,
+    sValue: PropTypes.number,
+  };
+
   constructor(props) {
     super(props);
 
-    const { params, type } = this.getBatteryData(props.batteryType);
-    const { id, format, size } = params;
+    const { packId, typeId, formatId } = this.props;
 
     this.state = {
-      packId: id,
-      type,
-      format,
-      batterySize: size,
+      packId,
+      typeId,
+      formatId,
     }
   }
 
-  getBatteryData(type) {
-    const batteryDataIndex = _.findIndex(BATTERY_TYPES_LIST, (data) => data.id === type);
+  renderVerticalView() {
+    const { pValue, sValue, viewType } = this.props;
+    const { typeId, formatId } = this.state;
 
-    return BATTERY_TYPES_LIST[batteryDataIndex];
+    const pLine = [];
+
+    for (let p = 0; p < pValue; p += 1) {
+      const sLine = [];
+
+      for (let s = 0; s < sValue; s += 1) {
+        sLine.push(<BatteryView id={`s${s + 1}p${p + 1}`} visible typeId={typeId} formatId={formatId} viewType={viewType} />)
+      }
+
+      pLine.push(
+        <div className="p-line-c" id={`p${p + 1}`}>
+          { sLine }
+        </div>
+      );
+    }
+
+    return pLine;
   }
 
   renderHorizontalView() {
@@ -40,34 +83,14 @@ class BatteryPackView extends React.Component {
     const pLine = [];
 
     for(let s = 0; s < S; s += 1) {
-      sLine.push()
 
     }
-  }
-
-  renderPLine(P, i) {
-    const pLine = [];
-    const { batteryId, batteryType, batteryFormat } = this.state;
-    const label = this.getBatteryLabel()
-
-    for(let p = 0; p < P; p += 1) {
-      pLine.push(<BatteryView packNumber={`p${i}${p}`} type={batteryType} format={batteryFormat}/>)
-    }
-  }
-
-  renderBatteryView() {
-    const { batteryId, batteryType, batteryFormat, batterySize } = this.state;
-  }
-
-  renderVerticalView() {
-
   }
 
   render() {
-    const { viewType, batteryType } = this.props;
-    const { position } = viewType;
+    const { viewType, viewPosition } = this.props;
 
-    const batteryView = viewType.position === POSITION.HORIZONTAL ? this.renderHorizontalView() : this.renderVerticalView();
+    const batteryView = viewPosition === POSITION.HORIZONTAL ? this.renderHorizontalView(viewType) : this.renderVerticalView(viewType);
 
     return (
       <div className="BatteryPackViewContainer">
@@ -76,12 +99,3 @@ class BatteryPackView extends React.Component {
     );
   }
 }
-
-BatteryPackView.propTypes = {
-  viewType: PropTypes.string,
-
-  S: PropTypes.number,
-  P: PropTypes.number,
-};
-
-export default BatteryPackView;

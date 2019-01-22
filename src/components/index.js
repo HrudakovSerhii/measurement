@@ -7,6 +7,7 @@ import LevelControl from './LevelControl';
 import MenuDropDown from './MenuDropDown';
 import CalculatedPackView from './CalculatedPackView';
 import BatteryView from './BatteryView';
+import BatteryPackView from './BatteryPackView';
 
 export {
   DropDownSelect,
@@ -15,4 +16,5 @@ export {
   LevelControl,
   CalculatedPackView,
   BatteryView,
+  BatteryPackView,
 }

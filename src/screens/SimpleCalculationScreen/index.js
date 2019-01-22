@@ -10,10 +10,10 @@ import React from 'react';
 import _ from 'lodash';
 
 // components
-import { InputField, DropDownSelect, BatteryView } from './../../components';
+import { InputField, DropDownSelect, BatteryPackView } from './../../components';
 
 // constants
-import { BATTERIES_TYPES_LIST, BATTERIES_FORMAT_LIST, VIEW_TYPE } from './../../constants';
+import { BATTERIES_TYPES_LIST, BATTERIES_FORMAT_LIST, VIEW_TYPE, POSITION } from './../../constants';
 
 // import './styles.scss';
 
@@ -58,7 +58,6 @@ export default class extends React.Component {
   render() {
     const { batteryTypeId, batteryFormatId } = this.state;
     const batteriesFormatList = this.getBatteriesFormatList(batteryTypeId);
-    console.log(batteryTypeId, batteryFormatId);
 
     return (
       <div className="SimpleCalculationScreenContainer">
@@ -67,7 +66,15 @@ export default class extends React.Component {
         <DropDownSelect label={'Choose your battery type'} dataList={BATTERIES_TYPES_LIST} onChange={(type) => this.setData('batteryTypeId', type)}/>
         <DropDownSelect label={'Choose your battery format'} dataList={batteriesFormatList} onChange={(format) => this.setData('batteryFormatId', format)}/>
         { batteryTypeId && batteryFormatId && (
-          <BatteryView id={1} visible typeId={batteryTypeId} formatId={batteryFormatId} viewType={VIEW_TYPE.TOP} packNumber={1} />
+          <BatteryPackView id={1}
+                           visible
+                           viewType={VIEW_TYPE.FACE}
+                           viewPosition={POSITION.VERTICAL}
+                           typeId={batteryTypeId}
+                           formatId={batteryFormatId}
+                           sValue={3}
+                           pValue={2}
+                           packNumber={1} />
         )}
       </div>
     );

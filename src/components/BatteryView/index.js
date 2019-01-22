@@ -23,7 +23,6 @@ import { VIEW_TYPE, BATTERIES_TYPES_LIST, BATTERIES_FORMAT_LIST } from '../../co
  * @param {bool} visible - visibility of component
  * @param {bool} showInfo - visibility of battery info (controlled from redux state)
  * @param {string} viewType - type of battery view look. Face, Top or Bottom view of the battery
- * @param {number} packNumber - number of the buttery in a pack (used to manipulate with schema connection)
  * @param {string} type - type of the battery (Li-Ion, NiMg, LTO ets)
  * @param {string} format - form factor of the battery (original physical size)
  * @param {bool} schemeVisible - visibility of scheme connection view
@@ -38,7 +37,6 @@ export default class extends React.Component {
     typeId: PropTypes.number.isRequired,
     formatId: PropTypes.number.isRequired,
     infoVisible: PropTypes.bool,
-    infoData: PropTypes.object,
     schemeVisible: PropTypes.bool,
     schemaType: PropTypes.string,
     schemaData: PropTypes.object,
@@ -48,18 +46,18 @@ export default class extends React.Component {
     return _.find(array, (item) => item.id === id);
   }
 
-  renderBatteryView(typeId, formatId, viewType, infoVisible, infoData) {
+  renderBatteryView(typeId, formatId, viewType, infoVisible) {
     const typeObj = this.getDataFromId(BATTERIES_TYPES_LIST, typeId);
     const formatObj = this.getDataFromId(BATTERIES_FORMAT_LIST, formatId);
 
-    const { type } = typeObj;
+    const { type, info } = typeObj;
     const { size, format } = formatObj;
 
     const height = viewType === VIEW_TYPE.FACE ? size.height : size.length;
 
     switch(viewType) {
       case VIEW_TYPE.FACE: return (
-        <BatteryFaceView width={size.width} height={height} type={type} format={format} showInfo={infoVisible} info={infoData} />
+        <BatteryFaceView width={size.width} height={height} type={type} format={format} showInfo={infoVisible} info={info} />
       );
       case VIEW_TYPE.TOP: return (
         <BatteryTopView width={size.width} height={height} format={format} />
@@ -69,7 +67,7 @@ export default class extends React.Component {
       );
       default:
         return (
-          <BatteryFaceView width={size.width} height={height} type={type} format={format} showInfo={infoVisible} info={infoData} />
+          <BatteryFaceView width={size.width} height={height} type={type} format={format} showInfo={infoVisible} info={info} />
         );
     }
   }
@@ -79,11 +77,10 @@ export default class extends React.Component {
   }
 
   render() {
-    console.log(this.props);
-    const { id, visible, viewType, typeId, formatId, infoVisible, infoData } = this.props;
+    const { id, visible, viewType, typeId, formatId, infoVisible } = this.props;
     const { schemeVisible, schemaType, schemaData } = this.props;
 
-    const renderedView = this.renderBatteryView(typeId, formatId, viewType, infoVisible, infoData);
+    const renderedView = this.renderBatteryView(typeId, formatId, viewType, infoVisible);
     const renderedSchemaView = this.renderSchemaView(schemaType, schemaData);
 
     return (

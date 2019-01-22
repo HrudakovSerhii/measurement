@@ -21,7 +21,7 @@ export default class extends React.Component {
     infoData: PropTypes.object,
   };
 
-  renderInfoContainer(type, format, power, current) {
+  renderInfoContainer(type, format, power) {
     const labelStyle = { fontSize: `${st(BATTERY_LABEL_BASE_FONT_SIZE)}px`};
 
     return (
@@ -29,14 +29,14 @@ export default class extends React.Component {
         <label style={labelStyle}>{type}</label>
         <label style={labelStyle}>{format}</label>
         <label style={labelStyle}>{power}</label>
-        <label style={labelStyle}>{current}</label>
       </div>
     );
   }
 
   render() {
-    const { width, height, type, format, showInfo, infoData } = this.props;
-    const { power, current } = infoData;
+    const { width, height, type, format, showInfo, info } = this.props;
+    const { volts } = info;
+    const { nom, min, max } = volts;
 
     const batteryStyle = {
       width: `${st(width)}px`,
@@ -48,7 +48,7 @@ export default class extends React.Component {
         <img alt="battery-head" src={`../images/${format}-Head.png`} />
         <div className="battery-b-c">
           <img alt="battery-body" src={`../images/${format}-Body.png`} />
-          { showInfo && this.renderInfoContainer(type, format, power, current) }
+          { showInfo && this.renderInfoContainer(type, format, nom) }
         </div>
         <img alt="battery-foot" src={`../images/${format}-Footer.png`} />
       </div>

@@ -12,6 +12,8 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import _ from 'lodash';
 
+import { ampsFromWattAndCurrent } from '../../logics/electronics';
+
 // components
 import { InputField, DropDownSelect, BatteryPackView } from './../../components';
 
@@ -29,10 +31,14 @@ export default class extends React.Component {
     super(props);
 
     this.state = {
-      powerValue: undefined,
-      currentValue: undefined,
+      powerValue: 1500,
+      currentValue: 48,
       batteryTypeId: null,
       batteryFormatId: null,
+      batteryValue: 3000,
+      pValue: undefined,
+      sValue: undefined,
+      calculateButteriesAmount: 0,
     };
   }
 
@@ -58,25 +64,85 @@ export default class extends React.Component {
     });
   }
 
+  getDataFromId(array, id) {
+    return _.find(array, (item) => item.id === id);
+  }
+
+  testFunc() {
+    const array = [0,1,2,4,5,8,6];
+
+    let res1 = '';
+
+    for(let i = 0; i < array.length; i += 1) {
+      res1 += array[i].toString();
+
+      if (i + 1 < array.length && ((!(array[i] % 2) || array[i] === 0) && !(array[i + 1] % 2))) {
+        res1 += '-';
+      }
+    }
+
+    // i + 1 < array.length && ((!(item % 2) || item === 0) && !(array[i + 1] % 2))
+
+    console.log(res1);
+
+    const res = array.map((item, i) => {
+      if(i + 1 < array.length && ((!(item % 2) || item === 0) && !(array[i + 1] % 2))) {
+        return item + '-';
+      }
+
+      return item;
+    }).join('');
+
+    console.log(res);
+  }
+
+  calculatePack() {
+    const { powerValue, currentValue, batteryValue, batteryTypeId } = this.state;
+    const batteryObj = this.getDataFromId(BATTERIES_TYPES_LIST, batteryTypeId);
+    const { info } = batteryObj;
+    const { volts } = info;
+
+    const maxAh = ampsFromWattAndCurrent(powerValue, currentValue);
+    const sValue = Math.round(currentValue / volts.nom);
+    const pValue = Math.round(maxAh / (batteryValue / 1000));
+    const calculateButteriesAmount = sValue * pValue;
+    console.log(calculateButteriesAmount);
+
+    this.setState({
+      pValue,
+      sValue,
+      calculateButteriesAmount
+    });
+  }
+
+  parametersValidator() {
+    const { powerValue, currentValue, batteryValue, batteryTypeId, batteryFormatId } = this.state;
+
+    return !(powerValue && currentValue && batteryValue && batteryTypeId !== null && batteryFormatId !== null);
+  }
+
   render() {
-    const { batteryTypeId, batteryFormatId } = this.state;
+    const { batteryTypeId, batteryFormatId, pValue, sValue } = this.state;
     const batteriesFormatList = this.getBatteriesFormatList(batteryTypeId);
     const n = 1;
+
     return (
       <div className="SimpleCalculationScreenContainer">
         <InputField label={'Power (Watt/H)'} placeholder={'Input power value for target device'} onInput={(text) => this.setData('powerValue', text)}/>
         <InputField label={'Current (Volts)'} placeholder={'Input current value for target device'} onInput={(text) => this.setData('currentValue', text)}/>
         <DropDownSelect label={'Choose your battery type'} dataList={BATTERIES_TYPES_LIST} onChange={(type) => this.setData('batteryTypeId', type)}/>
         <DropDownSelect label={'Choose your battery format'} dataList={batteriesFormatList} onChange={(format) => this.setData('batteryFormatId', format)}/>
-        { batteryTypeId && batteryFormatId && (
+        <InputField label={'Battery volume (mA)'} placeholder={'Input single battery volume in mA (XXXX)'} onInput={(text) => this.setData('batteryValue', text)}/>
+        <button disabled={this.parametersValidator()} onClick={() => this.calculatePack()}>Calculate</button>
+        { pValue && sValue && (
           <BatteryPackView id={n}
                            visible
-                           viewType={VIEW_TYPE.FACE}
+                           viewType={VIEW_TYPE.TOP}
                            viewPosition={POSITION.VERTICAL}
                            typeId={batteryTypeId}
                            formatId={batteryFormatId}
-                           sValue={3}
-                           pValue={2}
+                           sValue={sValue}
+                           pValue={pValue}
                            packNumber={1} />
         )}
       </div>

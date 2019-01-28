@@ -213,7 +213,7 @@ export const BATTERIES_TYPES_LIST = [
     type: 'LTO',
     info: {
       volts: {
-        nom: 3.2,
+        nom: 2.4,
         min: 2.8,
         max: 4.2
       },
@@ -251,7 +251,6 @@ export const BATTERIES_FORMAT_LIST = [
       width: 10,
       length: 10,
       height: 44,
-
     },
   },
   {

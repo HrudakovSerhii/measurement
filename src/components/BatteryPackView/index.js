@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 import BatteryView from './../BatteryView';
 
-import { POSITION } from './../../constants';
+import { POSITION, VIEW_TYPE } from './../../constants';
 
 // import './styles.scss';
 
@@ -53,13 +53,27 @@ export default class BatteryPackView extends React.Component {
     }
   }
 
+  /**
+   * In the future React may treat shouldComponentUpdate() as a hint rather than a strict directive, and returning false may still result in a re-rendering of the component.
+   */
+  shouldComponentUpdate(nextProps) {
+    const { pValue, sValue, shouldUpdate } = nextProps;
+
+    if (shouldUpdate || pValue !== this.props.pValue || sValue !== this.props.sValue) {
+      return true;
+    }
+
+    return false;
+  }
+
   renderVerticalView() {
     const { pValue, sValue, viewType } = this.props;
     const { typeId, formatId } = this.state;
 
+    const pV = viewType === VIEW_TYPE.FACE ? 1 : pValue; // This is exception to render only one line if viewType is face
     const pLine = [];
 
-    for (let p = 0; p < pValue; p += 1) {
+    for (let p = 0; p < pV; p += 1) {
       const sLine = [];
 
       for (let s = 0; s < sValue; s += 1) {

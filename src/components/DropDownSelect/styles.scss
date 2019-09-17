@@ -1,14 +1,9 @@
 /**
- * Created by Serhiy on 11/18/18
+ * Created by Serhiy on 12/6/18
  */
 
 .DropDownSelectContainer {
-
-  .label {
-
-  }
-
-  .select-item {
-
+  select:disabled {
+    color: grey;
   }
 }

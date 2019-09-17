@@ -8,15 +8,7 @@ import PropTypes from 'prop-types';
 // styles
 import '../styles.scss';
 
-export default class MenuDropDownItem extends React.Component {
-  static propTypes = {
-    clickCallback: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
-    closeOtherOptionViews: PropTypes.func,
-    selected: PropTypes.bool,
-    index: PropTypes.number
-  };
-
+class MenuDropDownItem extends React.Component {
   constructor(props) {
     super(props);
 
@@ -99,3 +91,13 @@ export default class MenuDropDownItem extends React.Component {
     );
   }
 }
+
+MenuDropDownItem.propTypes = {
+  clickCallback: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  closeOtherOptionViews: PropTypes.func,
+  selected: PropTypes.bool,
+  index: PropTypes.number
+};
+
+export default MenuDropDownItem;

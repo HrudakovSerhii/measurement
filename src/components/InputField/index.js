@@ -7,7 +7,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // styles
-import './styles.scss';
+// import './styles.scss';
 
 class InputField extends React.Component {
   render() {
@@ -18,7 +18,7 @@ class InputField extends React.Component {
         <span className="label">{label}</span>
         <input className="textInput"
                placeholder={placeholder}
-               onInput={onInput}
+               onInput={(e) => onInput(e.target.value)}
                value={value}
         />
       </div>

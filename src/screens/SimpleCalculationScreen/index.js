@@ -1,21 +1,28 @@
 /**
  * Created by Serhiy on 11/12/18
+<<<<<<< HEAD
+=======
+ * SimpleCalculationScreen component
+>>>>>>> simple-calculation
  */
 
 import React from 'react';
 
+// libraries
 // import PropTypes from 'prop-types';
+import _ from 'lodash';
 
+import { ampsFromWattAndCurrent } from '../../logics/electronics';
 
-
-import { InputField, DropDownSelect } from './../../components';
+// components
+import { InputField, CheckboxField, DropDownSelect, BatteryPackView } from './../../components';
 
 // constants
-import { BATTERY_TYPES_LIST } from './../../constants';
+import { BATTERIES_TYPES_LIST, BATTERIES_FORMAT_LIST, VIEW_TYPE, POSITION } from './../../constants';
 
 import './styles.scss';
 
-export default class SimpleCalculationScreen extends React.Component {
+export default class extends React.Component {
   static propTypes = {
 
   };
@@ -24,30 +31,134 @@ export default class SimpleCalculationScreen extends React.Component {
     super(props);
 
     this.state = {
-      userPowerValue: undefined,
-      userCurrentValue: undefined,
-      userBatteryTypeId: undefined,
+      powerValue: 1500,
+      currentValue: 48,
+      batteryTypeId: null,
+      batteryFormatId: null,
+      batteryValue: 3000,
+      pValue: undefined,
+      sValue: undefined,
+      prefWidth: undefined,
+      prefHeight: undefined,
+      hasPrefSize: false,
+      calculateButteriesAmount: 0,
+      selectedBatteryData: {},
     };
+
+    this.setData = this.setData.bind(this);
   }
 
-  selectItem(key, value) {
+  setData(key, value) {
+    const nValue = Number(value);
+
+    if (key === 'batteryTypeId' && !nValue) {
+      this.setState({
+        batteryFormatId: null,
+        [key]: nValue,
+      })
+    } else {
+      this.setState({
+        [key]: nValue,
+      })
+    }
+  }
+
+  getBatteriesFormatList(typeId) {
+    return _.filter(BATTERIES_FORMAT_LIST, (item) => {
+      const { types } = item;
+      return _.includes(types, Number(typeId));
+    });
+  }
+
+  getDataFromId(array, id) {
+    return _.find(array, (item) => item.id === id);
+  }
+
+  calculatePack() {
+    const { powerValue, currentValue, batteryValue, batteryTypeId } = this.state;
+    const batteryObj = this.getDataFromId(BATTERIES_TYPES_LIST, batteryTypeId);
+    const { info } = batteryObj;
+    const { volts } = info;
+
+    const maxAh = ampsFromWattAndCurrent(powerValue, currentValue);
+    const sValue = Math.round(currentValue / volts.nom);
+    const pValue = Math.round(maxAh / (batteryValue / 1000));
+    const calculateButteriesAmount = sValue * pValue;
+
     this.setState({
-      [key]: value
-    })
+      pValue,
+      sValue,
+      calculateButteriesAmount
+    });
+  }
+
+  parametersValidator() {
+    const { powerValue, currentValue, batteryValue, batteryTypeId, batteryFormatId } = this.state;
+
+    return (powerValue && currentValue && batteryValue && batteryTypeId !== null && batteryFormatId !== null);
+  }
+
+  renderPrefSizeForms() {
+    return (
+      <div className="form-c">
+        <InputField label={'Battery Pack width (mm)'} placeholder={'Input battery pack width in mm'} onInput={(text) => this.setData('prefWidth', text)}/>
+        <InputField label={'Battery Pack Height (mm)'} placeholder={'Input battery pack height in mm '} onInput={(text) => this.setData('prefHeight', text)}/>
+      </div>
+    )
+  }
+
+  getBatteryPackView(viewType, viewPosition, batteryTypeId, batteryFormatId, sValue, pValue, packNumber = 0, id = 0) {
+    return (
+      <BatteryPackView id={id}
+                       visible
+                       viewType={viewType}
+                       viewPosition={viewPosition}
+                       typeId={batteryTypeId}
+                       formatId={batteryFormatId}
+                       sValue={sValue}
+                       pValue={pValue}
+                       packNumber={packNumber} />
+    )
+  }
+
+  renderBatteryPack() {
+    const { batteryTypeId, batteryFormatId, sValue, pValue, prefWidth, prefHeight, hasPrefSize} = this.state;
+
+    if (hasPrefSize) {
+      const { prefWidth, prefHeight } = this.state;
+
+      const packViews = [];
+      const batteryObj = this.getDataFromId(BATTERIES_FORMAT_LIST, batteryFormatId);
+      const { size } = batteryObj;
+      const { width, length, height } = size;
+
+      return packViews;
+    } else {
+      return this.getBatteryPackView(VIEW_TYPE.TOP, POSITION.VERTICAL, batteryTypeId, batteryFormatId, sValue, pValue);
+    }
   }
 
   render() {
-    const { userPowerValue, userCurrentValue } = this.state;
+    const { batteryTypeId, batteryFormatId, pValue, sValue, hasPrefSize } = this.state;
+    const batteriesFormatList = this.getBatteriesFormatList(batteryTypeId);
+    const readyToCalculate = this.parametersValidator();
 
     return (
       <div className="SimpleCalculationScreenContainer">
-        <InputField value={userPowerValue} label={'Power (Watt/H)'} placeholder={'Input power value for target device'} />
-        <InputField value={userCurrentValue} label={'Current (Volts)'} placeholder={'Input current value for target device'} />
-        <DropDownSelect label={'Choose your battery type'} dataList={BATTERY_TYPES_LIST} onChange={(id) => this.selectItem('userBatteryTypeId', id)}/>
+        <InputField label={'Power (Watt/H)'} placeholder={'Input power value for target device'} onInput={(text) => this.setData('powerValue', text)}/>
+        <InputField label={'Current (Volts)'} placeholder={'Input current value for target device'} onInput={(text) => this.setData('currentValue', text)}/>
+        <DropDownSelect label={'Choose your battery type'} dataList={BATTERIES_TYPES_LIST} onChange={(type) => this.setData('batteryTypeId', type)}/>
+        <DropDownSelect label={'Choose your battery format'} dataList={batteriesFormatList} onChange={(format) => this.setData('batteryFormatId', format)}/>
+        <InputField label={'Battery volume (mA)'} placeholder={'Input single battery volume in mA (XXXX)'} onInput={(text) => this.setData('batteryValue', text)}/>
+        <CheckboxField label={'Set Preferable Size of the Pack'} onChange={() => this.setState({ hasPrefSize: !hasPrefSize })}/>
+        { hasPrefSize && this.renderPrefSizeForms() }
+        <button disabled={!readyToCalculate} onClick={() => this.calculatePack()}>Calculate</button>
+        { readyToCalculate && this.renderBatteryPack() }
       </div>
     );
   }
 }
+
 //
 // 1. Потужність приладу що буде використовувати акамулятор (Ватт/годину - Watt/h) = 1500
 //

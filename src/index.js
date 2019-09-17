@@ -9,21 +9,16 @@ import serviceWorker from './serviceWorker';
 
 import appReducer from './reducers'
 
-import {APP_SETTINGS} from './constants';
+import { APP_STATE } from './constants';
 
 import './index.css';
 
-const store = createStore(appReducer, APP_SETTINGS);
-
-const currentState = store.getState();
+const store = createStore(appReducer, APP_STATE);
+// const currentState = store.getState();
 
 render(
   <Provider store={store}>
-    <App appState={currentState.appState}
-         toolsState={currentState.toolsState}
-         calculationState={currentState.calculationState}
-         workSpaceState={currentState.workSpaceState}
-    />
+    <App/>
   </Provider>,
   document.getElementById('root')
 );

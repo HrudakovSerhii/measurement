@@ -5,11 +5,10 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 
 import BatteryView from './../BatteryView';
 
-import { POSITION, BATTERIES_TYPES_LIST } from './../../constants';
+import { POSITION, VIEW_TYPE } from './../../constants';
 
 // import './styles.scss';
 
@@ -54,21 +53,39 @@ export default class BatteryPackView extends React.Component {
     }
   }
 
+  /**
+   * In the future React may treat shouldComponentUpdate() as a hint rather than a strict directive, and returning false may still result in a re-rendering of the component.
+   */
+  shouldComponentUpdate(nextProps) {
+    const { pValue, sValue, shouldUpdate } = nextProps;
+
+    if (shouldUpdate || pValue !== this.props.pValue || sValue !== this.props.sValue) {
+      return true;
+    }
+
+    return false;
+  }
+
   renderVerticalView() {
     const { pValue, sValue, viewType } = this.props;
     const { typeId, formatId } = this.state;
 
+    const pV = viewType === VIEW_TYPE.FACE ? 1 : pValue; // This is exception to render only one line if viewType is face
     const pLine = [];
 
-    for (let p = 0; p < pValue; p += 1) {
+    for (let p = 0; p < pV; p += 1) {
       const sLine = [];
 
       for (let s = 0; s < sValue; s += 1) {
-        sLine.push(<BatteryView id={`s${s + 1}p${p + 1}`} visible typeId={typeId} formatId={formatId} viewType={viewType} />)
+        const key = `s${s + 1}p${p + 1}`;
+
+        sLine.push(<BatteryView key={key} id={key} visible typeId={typeId} formatId={formatId} viewType={viewType} />)
       }
 
+      const key = `p${p + 1}`;
+
       pLine.push(
-        <div className="p-line-c" id={`p${p + 1}`}>
+        <div key={key} className="p-line-c" id={key}>
           { sLine }
         </div>
       );
@@ -78,13 +95,13 @@ export default class BatteryPackView extends React.Component {
   }
 
   renderHorizontalView() {
-    const { S, P } = this.props;
-    const sLine = [];
-    const pLine = [];
-
-    for(let s = 0; s < S; s += 1) {
-
-    }
+    // const { S, P } = this.props;
+    // const sLine = [];
+    // const pLine = [];
+    //
+    // for(let s = 0; s < S; s += 1) {
+    //
+    // }
   }
 
   render() {

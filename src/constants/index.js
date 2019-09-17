@@ -25,6 +25,12 @@ export const THEME_TYPES = {
 /*
  * App view constants
  */
+export const MENU_TYPES = {
+  ENABLED: 'ENABLED',
+  DISABLED: 'DISABLED',
+  HAS_OPTIONS: 'HAS_OPTIONS'
+};
+
 export const FILE_MENU = {
   TITLE: 'File',
   MENU: [
@@ -119,11 +125,7 @@ export const COMMANDS = {
   }
 };
 
-export const MENU_TYPES = {
-  ENABLED: 'ENABLED',
-  DISABLED: 'DISABLED',
-  HAS_OPTIONS: 'HAS_OPTIONS'
-};
+
 
 /*
  * App tools constants
@@ -211,7 +213,7 @@ export const BATTERIES_TYPES_LIST = [
     type: 'LTO',
     info: {
       volts: {
-        nom: 3.2,
+        nom: 2.4,
         min: 2.8,
         max: 4.2
       },
@@ -249,7 +251,6 @@ export const BATTERIES_FORMAT_LIST = [
       width: 10,
       length: 10,
       height: 44,
-
     },
   },
   {

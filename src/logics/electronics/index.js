@@ -10,12 +10,15 @@ const ampsToVoltsFromOhms = (amps, ohms) => {
   return ohms * amps;
 };
 
-const electronics = {
-  ampsToVolts: {
-    fromWatts: ampsToVoltsFromWatts,
-    fromOhms: ampsToVoltsFromOhms
-  }
+const ampsFromWattAndCurrent = (watts, volts) => watts / volts;
+
+const ampsToVolts = {
+  fromWatts: ampsToVoltsFromWatts,
+  fromOhms: ampsToVoltsFromOhms
 };
 
-export default electronics;
+export {
+  ampsToVolts,
+  ampsFromWattAndCurrent
+};
 

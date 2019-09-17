@@ -15,12 +15,12 @@ import _ from 'lodash';
 import { ampsFromWattAndCurrent } from '../../logics/electronics';
 
 // components
-import { InputField, DropDownSelect, BatteryPackView } from './../../components';
+import { InputField, CheckboxField, DropDownSelect, BatteryPackView } from './../../components';
 
 // constants
 import { BATTERIES_TYPES_LIST, BATTERIES_FORMAT_LIST, VIEW_TYPE, POSITION } from './../../constants';
 
-// import './styles.scss';
+import './styles.scss';
 
 export default class extends React.Component {
   static propTypes = {
@@ -38,8 +38,14 @@ export default class extends React.Component {
       batteryValue: 3000,
       pValue: undefined,
       sValue: undefined,
+      prefWidth: undefined,
+      prefHeight: undefined,
+      hasPrefSize: false,
       calculateButteriesAmount: 0,
+      selectedBatteryData: {},
     };
+
+    this.setData = this.setData.bind(this);
   }
 
   setData(key, value) {
@@ -68,34 +74,6 @@ export default class extends React.Component {
     return _.find(array, (item) => item.id === id);
   }
 
-  testFunc() {
-    const array = [0,1,2,4,5,8,6];
-
-    let res1 = '';
-
-    for(let i = 0; i < array.length; i += 1) {
-      res1 += array[i].toString();
-
-      if (i + 1 < array.length && ((!(array[i] % 2) || array[i] === 0) && !(array[i + 1] % 2))) {
-        res1 += '-';
-      }
-    }
-
-    // i + 1 < array.length && ((!(item % 2) || item === 0) && !(array[i + 1] % 2))
-
-    console.log(res1);
-
-    const res = array.map((item, i) => {
-      if(i + 1 < array.length && ((!(item % 2) || item === 0) && !(array[i + 1] % 2))) {
-        return item + '-';
-      }
-
-      return item;
-    }).join('');
-
-    console.log(res);
-  }
-
   calculatePack() {
     const { powerValue, currentValue, batteryValue, batteryTypeId } = this.state;
     const batteryObj = this.getDataFromId(BATTERIES_TYPES_LIST, batteryTypeId);
@@ -106,7 +84,6 @@ export default class extends React.Component {
     const sValue = Math.round(currentValue / volts.nom);
     const pValue = Math.round(maxAh / (batteryValue / 1000));
     const calculateButteriesAmount = sValue * pValue;
-    console.log(calculateButteriesAmount);
 
     this.setState({
       pValue,
@@ -118,13 +95,53 @@ export default class extends React.Component {
   parametersValidator() {
     const { powerValue, currentValue, batteryValue, batteryTypeId, batteryFormatId } = this.state;
 
-    return !(powerValue && currentValue && batteryValue && batteryTypeId !== null && batteryFormatId !== null);
+    return (powerValue && currentValue && batteryValue && batteryTypeId !== null && batteryFormatId !== null);
+  }
+
+  renderPrefSizeForms() {
+    return (
+      <div className="form-c">
+        <InputField label={'Battery Pack width (mm)'} placeholder={'Input battery pack width in mm'} onInput={(text) => this.setData('prefWidth', text)}/>
+        <InputField label={'Battery Pack Height (mm)'} placeholder={'Input battery pack height in mm '} onInput={(text) => this.setData('prefHeight', text)}/>
+      </div>
+    )
+  }
+
+  getBatteryPackView(viewType, viewPosition, batteryTypeId, batteryFormatId, sValue, pValue, packNumber = 0, id = 0) {
+    return (
+      <BatteryPackView id={id}
+                       visible
+                       viewType={viewType}
+                       viewPosition={viewPosition}
+                       typeId={batteryTypeId}
+                       formatId={batteryFormatId}
+                       sValue={sValue}
+                       pValue={pValue}
+                       packNumber={packNumber} />
+    )
+  }
+
+  renderBatteryPack() {
+    const { batteryTypeId, batteryFormatId, sValue, pValue, prefWidth, prefHeight, hasPrefSize} = this.state;
+
+    if (hasPrefSize) {
+      const { prefWidth, prefHeight } = this.state;
+
+      const packViews = [];
+      const batteryObj = this.getDataFromId(BATTERIES_FORMAT_LIST, batteryFormatId);
+      const { size } = batteryObj;
+      const { width, length, height } = size;
+
+      return packViews;
+    } else {
+      return this.getBatteryPackView(VIEW_TYPE.TOP, POSITION.VERTICAL, batteryTypeId, batteryFormatId, sValue, pValue);
+    }
   }
 
   render() {
-    const { batteryTypeId, batteryFormatId, pValue, sValue } = this.state;
+    const { batteryTypeId, batteryFormatId, pValue, sValue, hasPrefSize } = this.state;
     const batteriesFormatList = this.getBatteriesFormatList(batteryTypeId);
-    const n = 1;
+    const readyToCalculate = this.parametersValidator();
 
     return (
       <div className="SimpleCalculationScreenContainer">
@@ -133,18 +150,10 @@ export default class extends React.Component {
         <DropDownSelect label={'Choose your battery type'} dataList={BATTERIES_TYPES_LIST} onChange={(type) => this.setData('batteryTypeId', type)}/>
         <DropDownSelect label={'Choose your battery format'} dataList={batteriesFormatList} onChange={(format) => this.setData('batteryFormatId', format)}/>
         <InputField label={'Battery volume (mA)'} placeholder={'Input single battery volume in mA (XXXX)'} onInput={(text) => this.setData('batteryValue', text)}/>
-        <button disabled={this.parametersValidator()} onClick={() => this.calculatePack()}>Calculate</button>
-        { pValue && sValue && (
-          <BatteryPackView id={n}
-                           visible
-                           viewType={VIEW_TYPE.TOP}
-                           viewPosition={POSITION.VERTICAL}
-                           typeId={batteryTypeId}
-                           formatId={batteryFormatId}
-                           sValue={sValue}
-                           pValue={pValue}
-                           packNumber={1} />
-        )}
+        <CheckboxField label={'Set Preferable Size of the Pack'} onChange={() => this.setState({ hasPrefSize: !hasPrefSize })}/>
+        { hasPrefSize && this.renderPrefSizeForms() }
+        <button disabled={!readyToCalculate} onClick={() => this.calculatePack()}>Calculate</button>
+        { readyToCalculate && this.renderBatteryPack() }
       </div>
     );
   }
